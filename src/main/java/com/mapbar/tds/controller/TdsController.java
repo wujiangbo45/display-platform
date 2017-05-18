@@ -3,6 +3,7 @@ package com.mapbar.tds.controller;
 import com.mapbar.tds.command.BaseCommand;
 import com.mapbar.tds.command.TdsInCommand;
 import com.mapbar.tds.command.TdsOutCommand;
+import com.mapbar.tds.common.GenericResponseBody;
 import com.mapbar.tds.result.CommonResult;
 import com.mapbar.tds.service.TdsService;
 import org.slf4j.Logger;
@@ -30,25 +31,11 @@ public class TdsController extends BaseController {
     private TdsService tdsService;
 
     @RequestMapping(value = "/test")
-    @ResponseBody
-    public Map<String, String> test(BaseCommand command) {
+    @GenericResponseBody
+    public Map<String,String> test(BaseCommand command) throws Throwable {
         Map<String, String> result = new HashMap<String, String>();
         result.put("key", "hello, word!!!");
         return result;
     }
 
-    @RequestMapping(value = "/in")
-    @ResponseBody
-    public CommonResult tdsIn(TdsInCommand command) {
-        logger.info(command.toString());
-        return tdsService.tdsIn(command);
-    }
-
-
-    @RequestMapping(value = "/out")
-    @ResponseBody
-    public CommonResult tdsOut(TdsOutCommand command) {
-        logger.info(command.toString());
-        return tdsService.tdsOut(command);
-    }
 }
