@@ -1,4 +1,4 @@
-package com.mapbar.tds.common;
+package com.mapbar.display.common;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

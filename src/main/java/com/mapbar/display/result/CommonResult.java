@@ -1,4 +1,4 @@
-package com.mapbar.tds.result;
+package com.mapbar.display.result;
 
 /**
  * Created by yinsihua on 2017/5/2.

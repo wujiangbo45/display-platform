@@ -1,4 +1,4 @@
-package com.mapbar.tds.exception;
+package com.mapbar.display.exception;
 
 
 /**

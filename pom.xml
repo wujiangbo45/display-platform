@@ -112,7 +112,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>com.mapbar.tds.Application</mainClass>
+                    <mainClass>com.mapbar.display.Application</mainClass>
                     <layout>JAR</layout>
                     <classifier>boot</classifier>
                 </configuration>

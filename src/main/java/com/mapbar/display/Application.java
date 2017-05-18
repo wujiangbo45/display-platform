@@ -1,6 +1,6 @@
-package com.mapbar.tds;
+package com.mapbar.display;
 
-import com.mapbar.tds.common.GenericResponseBodyMethodProcessorRegister;
+import com.mapbar.display.common.GenericResponseBodyMethodProcessorRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

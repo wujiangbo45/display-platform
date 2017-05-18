@@ -1,4 +1,4 @@
-package com.mapbar.tds.result;
+package com.mapbar.display.result;
 
 /**
  * 通用Http code 封装

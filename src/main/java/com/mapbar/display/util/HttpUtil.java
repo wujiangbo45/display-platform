@@ -1,4 +1,4 @@
-package com.mapbar.tds.util;
+package com.mapbar.display.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

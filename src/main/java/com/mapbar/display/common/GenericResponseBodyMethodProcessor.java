@@ -1,7 +1,6 @@
-package com.mapbar.tds.common;
+package com.mapbar.display.common;
 
-import com.mapbar.tds.result.GenericResponse;
-import org.springframework.context.annotation.Bean;
+import com.mapbar.display.result.GenericResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -10,7 +9,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 

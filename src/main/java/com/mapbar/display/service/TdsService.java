@@ -1,12 +1,12 @@
-package com.mapbar.tds.service;
+package com.mapbar.display.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mapbar.tds.command.TdsInCommand;
-import com.mapbar.tds.command.TdsOutCommand;
-import com.mapbar.tds.result.CommonResult;
-import com.mapbar.tds.result.ReturnCode;
-import com.mapbar.tds.util.HttpUtil;
-import com.mapbar.tds.util.JsonUtil;
+import com.mapbar.display.command.TdsInCommand;
+import com.mapbar.display.command.TdsOutCommand;
+import com.mapbar.display.result.CommonResult;
+import com.mapbar.display.result.ReturnCode;
+import com.mapbar.display.util.HttpUtil;
+import com.mapbar.display.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

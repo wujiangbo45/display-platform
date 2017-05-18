@@ -1,4 +1,4 @@
-package com.mapbar.tds.result;
+package com.mapbar.display.result;
 
 /**
  * 返回结果抽象接口

@@ -1,4 +1,4 @@
-package com.mapbar.tds.util;
+package com.mapbar.display.util;
 
 import java.io.IOException;
 
