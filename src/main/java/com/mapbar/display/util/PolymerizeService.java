@@ -20,7 +20,7 @@ public class PolymerizeService {
 //    private final Integer[] precision = {5,6,7,10,11,12,15,16,17,20,21};//one
 //    private final Integer[] precision = {1,3,4,6,7,12,15,16,17,20,21};//two
 //    private final Integer[] precision = {1,5,6,10,11,12,15,16,17,20,21};//three
-    private final Integer[] precision = {3,4,6,10,11,12,15,16,17,20,21};//four
+    private final Integer[] precision = {3,4,6,10,11,12,13,15,16,17,20,21};//four
     // 区域距离长度
     private final Double[] kmLevel = {626.172135,150.348414,82.119366,19.567879,4.707179,2.564679,0.611496,0.147084,0.080188,0.019109,0.004596};
 
@@ -364,7 +364,9 @@ public class PolymerizeService {
 //        //===============================================================================
 //        // 对车辆进行聚合
 //        //===============================================================================
-//        PolymerizeService polymerizeService = new PolymerizeService();
+        PolymerizeService polymerizeService = new PolymerizeService();
+        int numBits = polymerizeService.setPrecision(39.9305539204465,116.54424947580344,39.90544137998913,116.41376591150993);
+        System.out.println(numBits);
 //        if (realTimePointList != null && realTimePointList.size() > 0) {
 //            //2016/11/6 songzb start 精度修改设定，当地图级别为17级及以上时，精度设置为最大
 //            int numBits = 5;//默认值设定为精度最大值(精度最大值代表精度最低)
