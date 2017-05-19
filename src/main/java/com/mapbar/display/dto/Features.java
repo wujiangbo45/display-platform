@@ -2,6 +2,7 @@ package com.mapbar.display.dto;
 
 import com.mapbar.display.common.Const;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,7 +15,7 @@ public class Features {
 
     private Geometry geometry;
 
-    private Map<String,String> properties;
+    private Map<String,String> properties = new HashMap<String,String>(1);
 
     public String getType() {
         return type;
