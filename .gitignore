@@ -2,7 +2,7 @@
 *.class
 *.iml
 .idean
-.idea
+?.idea/
 .settings/
 out/
 .project
