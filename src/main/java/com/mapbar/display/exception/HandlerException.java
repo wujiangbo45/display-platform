@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,20 @@ public class HandlerException {
     @Autowired
     protected MessageSource messageSource;
 
+
+    @ExceptionHandler(BindException.class)
+    @ResponseBody
+    public GenericResponse<?> handleBindException(HttpServletRequest request, BindException ex) {
+        logger.error("bind exception", ex);
+        GenericResponse<?> resp = null;
+
+        String code = ErrorCode.UNKNOWN_ERR;
+
+        resp = new GenericResponse<>(code, ex.getAllErrors().get(0).getDefaultMessage(), null);
+
+        return resp;
+    }
+
     /**
      * 处理未知异常
      */
@@ -37,4 +52,6 @@ public class HandlerException {
 
         return resp;
     }
+
+
 }
