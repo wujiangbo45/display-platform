@@ -37,7 +37,7 @@ public class TdsController extends BaseController {
     public Map<String,String> test(BaseCommand command) throws Throwable {
         Map<String, String> result = new HashMap<String, String>();
         result.put("key", "hello, word!!!");
-
+        tdsService.test();
         return result;
     }
 
