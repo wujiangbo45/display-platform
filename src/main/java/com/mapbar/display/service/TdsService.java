@@ -8,6 +8,7 @@ import com.mapbar.display.result.CommonResult;
 import com.mapbar.display.result.ReturnCode;
 import com.mapbar.display.util.HttpUtil;
 import com.mapbar.display.util.JsonUtil;
+import com.mapbar.display.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class TdsService {
     private String tdsOutUrl;
     @Autowired
     HyCarRepository hyCarRepository;
+
+    @Autowired
+    RedisUtil redisUtil;
 
     /**
      * TDS入库
@@ -94,6 +98,7 @@ public class TdsService {
     }
 
     public void test(){
-        System.out.println(hyCarRepository.findByCarId(1L));
+        hyCarRepository.findByCarId(1L);
+        System.out.println(redisUtil.get("a"));
     }
 }
