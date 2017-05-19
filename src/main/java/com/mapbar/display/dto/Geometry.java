@@ -18,7 +18,12 @@ public class Geometry {
         return coordinates;
     }
 
-    public void setCoordinates(double lat, double lot) {
-        this.coordinates = new double[]{lat,lot};
+    /**
+     *
+     * @param lon 经度
+     * @param lat 纬度
+     */
+    public void setCoordinates(double lon, double lat) {
+        this.coordinates = new double[]{lon,lat};
     }
 }

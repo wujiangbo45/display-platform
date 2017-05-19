@@ -3,12 +3,14 @@ package com.mapbar.display.service;
 import com.alibaba.fastjson.JSONObject;
 import com.mapbar.display.command.TdsInCommand;
 import com.mapbar.display.command.TdsOutCommand;
+import com.mapbar.display.repository.HyCarRepository;
 import com.mapbar.display.result.CommonResult;
 import com.mapbar.display.result.ReturnCode;
 import com.mapbar.display.util.HttpUtil;
 import com.mapbar.display.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ public class TdsService {
 
     @Value("${tdsOutUrl}")
     private String tdsOutUrl;
+    @Autowired
+    HyCarRepository hyCarRepository;
 
     /**
      * TDS入库
@@ -87,5 +91,9 @@ public class TdsService {
         }
         logger.info("tdsOut--------end--------");
         return result;
+    }
+
+    public void test(){
+        System.out.println(hyCarRepository.findByCarId(1L));
     }
 }
