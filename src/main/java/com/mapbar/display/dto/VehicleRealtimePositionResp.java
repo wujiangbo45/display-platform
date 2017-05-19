@@ -18,10 +18,6 @@ public class VehicleRealtimePositionResp {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public List<Features> getFeatures() {
         return features;
     }

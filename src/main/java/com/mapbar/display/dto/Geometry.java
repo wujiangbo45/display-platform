@@ -14,15 +14,11 @@ public class Geometry {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public double[] getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(double[] coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(double lat, double lot) {
+        this.coordinates = new double[]{lat,lot};
     }
 }
