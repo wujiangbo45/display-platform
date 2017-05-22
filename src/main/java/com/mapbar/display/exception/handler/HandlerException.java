@@ -2,6 +2,7 @@ package com.mapbar.display.exception.handler;
 
 import com.mapbar.display.exception.ErrorCode;
 import com.mapbar.display.exception.http.HttpRequestException;
+import com.mapbar.display.exception.http.LocalCloudException;
 import com.mapbar.display.result.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,20 +61,34 @@ public class HandlerException {
 
     /**
      * 处理http请求异常
+     *
      * @param request
      * @param ex
      * @return
-     * @author:wujiangbo
-     * Created on 2016年3月15日 上午9:35:19
+     * @author:wujiangbo Created on 2016年3月15日 上午9:35:19
      * @modify author:修改人
      * Modify on 修改时间
      */
     @ExceptionHandler(HttpRequestException.class)
     @ResponseBody
     public GenericResponse<?> handleHttpRequestException(HttpServletRequest request, HttpRequestException ex) {
-        logger.error("Http request failed", ex);
+        logger.error("http request failed", ex);
         GenericResponse<?> resp = null;
         resp = HttpRequestExceptionHandler.handleHttpRequestException(request, ex, messageSource);
+        if (resp != null) {
+            return resp;
+        } else {
+            resp = handleThrowable(request, ex);
+        }
+        return resp;
+    }
+
+    @ExceptionHandler(LocalCloudException.class)
+    @ResponseBody
+    public GenericResponse<?> handleLocalCloudException(HttpServletRequest request, LocalCloudException ex) {
+        logger.error("request local cloud failed", ex);
+        GenericResponse<?> resp = null;
+        resp = LocalCloudExceptionHandler.handleLocalCloudException(request, ex, messageSource);
         if (resp != null) {
             return resp;
         } else {
@@ -85,11 +100,11 @@ public class HandlerException {
 
     /**
      * 处理servlet异常
+     *
      * @param request
      * @param ex
      * @return
-     * @author:wujiangbo
-     * Created on 2016年3月15日 下午2:20:55
+     * @author:wujiangbo Created on 2016年3月15日 下午2:20:55
      * @modify author:修改人
      * Modify on 修改时间
      */

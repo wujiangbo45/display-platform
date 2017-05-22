@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Charsets;
 import com.mapbar.display.common.Const;
-import com.mapbar.display.exception.http.HttpMessageTransferException;
-import com.mapbar.display.exception.http.HttpRequestNotSuccessException;
+import com.mapbar.display.dto.LocalCloudRespopnse;
+import com.mapbar.display.exception.http.*;
 import com.mapbar.display.util.JsonUtils;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
@@ -45,6 +46,10 @@ public final class HttpUtil {
 	private static final String TEXT_NORMAL = "application/x-www-form-urlencoded; charset=utf-8";
 	
 	private static final int OK = 200;
+	private static final int PARAM_ERROR = 400;
+	private static final int CONNECT_REFUSED = 403;
+	private static final int SERVER_ERROR = 500;
+
 
 	private static final HttpClient httpClient = getHttpClient();
 
@@ -185,7 +190,45 @@ public final class HttpUtil {
 			}
 		}
 	}
-	
+
+
+	public static <T> T getLocalCloudJsonRequest(String url, TypeReference<T> valueTypeRef) {
+		Assert.hasLength(url, "请求url不能为空字符串。");
+
+		HttpMethodBase httpMethod = new GetMethod(url);
+
+		httpMethod.setRequestHeader(CONTENT_TYPE, APPLICATION_JSON_UTF8);
+		// 发送含xml消息体的对象
+		try {
+			// 执行请求并接收响应码
+			int resultCode = httpClient.executeMethod(httpMethod);
+
+			String respStr = httpMethod.getResponseBodyAsString();
+			if (resultCode == OK) {
+				// 响应体
+				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(respStr, valueTypeRef);
+				int businesCode = rep.getCode();
+				T data = null;
+				switch (businesCode){
+					case OK : data = rep.getData();
+					case PARAM_ERROR : throw new LocalCloudParamErrorException();
+					case CONNECT_REFUSED : throw new LocalCloudRefusedException();
+					case SERVER_ERROR : throw new LocalCloudServerErrorException();
+				}
+				return data;
+			} else {
+				StatusLine staline = httpMethod.getStatusLine();
+				throw new HttpRequestNotSuccessException(staline.getStatusCode(), staline.getReasonPhrase());
+			}
+		} catch (IOException e) {
+			throw new HttpMessageTransferException(e);
+		} finally {
+			if (httpMethod != null) {
+				httpMethod.releaseConnection();
+			}
+		}
+	}
+
 	/**
 	 * 获取http响应码是200的指定响应头值
 	 * @param url
