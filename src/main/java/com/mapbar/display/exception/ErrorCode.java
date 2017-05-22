@@ -26,7 +26,7 @@ public class ErrorCode {
 	public static final String TOKEN_EXPIRE = "99";
 	
 	/*未知错误*/
-	public static final String UNKNOWN_ERR = "100";
+	public static final String UNKNOWN_ERR = "500";
 	
 	/*JD库存不足*/
 	public static final String JD_STOCK_INSUFFICIENT = "301";

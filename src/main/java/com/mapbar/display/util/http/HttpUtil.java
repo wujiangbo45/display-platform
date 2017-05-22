@@ -213,9 +213,9 @@ public final class HttpUtil {
 				T data = null;
 				switch (businesCode){
 					case OK : data = rep.getData(); break;
-					case PARAM_ERROR : throw new LocalCloudParamErrorException();
-					case CONNECT_REFUSED : throw new LocalCloudRefusedException();
-					case SERVER_ERROR : throw new LocalCloudServerErrorException();
+					case PARAM_ERROR : throw new LocalCloudParamErrorException(rep.getMessage());
+					case CONNECT_REFUSED : throw new LocalCloudRefusedException(rep.getMessage());
+					case SERVER_ERROR : throw new LocalCloudServerErrorException(rep.getMessage());
 				}
 				return data;
 			} else {

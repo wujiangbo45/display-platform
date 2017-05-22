@@ -5,11 +5,22 @@ package com.mapbar.display.dto;
  * @Create: 2017/05/22 8:53
  */
 public class LocalCloudRespopnse<T> extends BaseResp{
+
+    private String message;
+
     private T data;
 
 
     LocalCloudRespopnse(){
 
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     LocalCloudRespopnse (T data){
