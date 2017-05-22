@@ -102,4 +102,9 @@ public class TdsService extends BaseService{
     }
 
 
+    public void test() {
+        String  s = sqlLaberUtil.getSqlLabel("test",null);
+        System.out.println(s);
+    }
+
 }
