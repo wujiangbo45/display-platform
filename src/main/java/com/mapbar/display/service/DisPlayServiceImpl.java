@@ -30,7 +30,7 @@ public class DisPlayServiceImpl extends BaseService implements IDisplayService{
     public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception{
         String numBit = req.getNumBits();
         // 请求位置云
-        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest("",new TypeReference<List<LocationDataResp>>(){});
+        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest("localcloud.getLocationData",new TypeReference<List<LocationDataResp>>(){});
         int size = resp.size();
         List<PolymerizeDto> dtoList = new ArrayList<>(size);
         for (LocationDataResp data : resp){
@@ -48,7 +48,7 @@ public class DisPlayServiceImpl extends BaseService implements IDisplayService{
     @Override
     public List<GetServiceStatisticsResp> getServiceStatistics(GetServiceStatisticsReq req) throws Exception{
         // 拼接url
-        String getUrl = HttpUtil.getUrl(UrlProperties.getUrl(""), req);
+        String getUrl = HttpUtil.getUrl(UrlProperties.getUrl("localcloud.serverStations"), req);
         List<DistrictNumberResp> cloudResp = HttpUtil.getLocalCloudJsonRequest(getUrl, new TypeReference<List<DistrictNumberResp>>() {
         });
         int size = cloudResp.size();
