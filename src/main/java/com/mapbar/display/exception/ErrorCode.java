@@ -27,7 +27,9 @@ public class ErrorCode {
 	
 	/*未知错误*/
 	public static final String UNKNOWN_ERR = "500";
-	
+
+	public static final String PARAM_ERR = "400";
+
 	/*JD库存不足*/
 	public static final String JD_STOCK_INSUFFICIENT = "301";
 	

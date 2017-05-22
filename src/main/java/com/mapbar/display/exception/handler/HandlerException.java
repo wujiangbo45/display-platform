@@ -35,7 +35,7 @@ public class HandlerException {
         logger.error("bind exception", ex);
         GenericResponse<?> resp = null;
 
-        String code = ErrorCode.UNKNOWN_ERR;
+        String code = ErrorCode.PARAM_ERR;
 
         resp = new GenericResponse<>(code, ex.getAllErrors().get(0).getDefaultMessage(), null);
 
