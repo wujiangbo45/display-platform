@@ -33,7 +33,7 @@ public class UrlProperties {
 
     }
 
-    public static String getProperty(String key){
+    public static String getUrl(String key){
         return String.valueOf(props.get(key));
     }
 
