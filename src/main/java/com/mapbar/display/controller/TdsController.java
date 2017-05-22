@@ -48,17 +48,5 @@ public class TdsController extends BaseController {
         return result;
     }
 
-    public static void main(String[] args) {
-        VehicleRealtimePositionResp s = new VehicleRealtimePositionResp();
-        List<Features> f = new ArrayList<>();
-        Features d = new Features();
-        Geometry g = new Geometry();
-        g.setCoordinates(115.4,127.333);
-        d.setGeometry(g);
-        d.setProperties("3333");
-        f.add(d);
-        s.setFeatures(f);
-        System.out.println(JsonUtils.toJson(s));
-    }
 
 }

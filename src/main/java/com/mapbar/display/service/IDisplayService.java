@@ -10,4 +10,5 @@ import com.mapbar.display.dto.VehicleRealtimePositionResp;
 public interface IDisplayService {
 
     public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req);
+
 }
