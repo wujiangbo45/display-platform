@@ -49,6 +49,7 @@ public class HttpUtil {
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.setUseCaches(false);
+
         conn.setReadTimeout(30000);
         conn.setRequestProperty("contentType", "utf-8");
         conn.setRequestProperty("accept", "*/*");
