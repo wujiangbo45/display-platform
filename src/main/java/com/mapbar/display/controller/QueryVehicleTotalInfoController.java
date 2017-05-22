@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapbar.display.command.TestCommand;
 import com.mapbar.display.common.GenericResponseBody;
 import com.mapbar.display.dto.GetTotalMileageAndPackage;
+import com.mapbar.display.dto.LocalCloudRespopnse;
 import com.mapbar.display.dto.LocationDataResp;
 import com.mapbar.display.dto.QueryVehicleTotalInfo;
 import com.mapbar.display.service.QueryVehicleTotalInfoService;
@@ -38,11 +39,9 @@ public class QueryVehicleTotalInfoController extends BaseController{
     @RequestMapping(value = "/totalInfo")
     @GenericResponseBody
     public QueryVehicleTotalInfo totalInfo() throws Exception {
-        HttpEntity<GetTotalMileageAndPackage> resp = HttpUtil.getLocalCloudJsonRequest("", new TypeReference<HttpEntity<GetTotalMileageAndPackage>>() {
+        GetTotalMileageAndPackage totalMil = HttpUtil.getLocalCloudJsonRequest("", new TypeReference<LocalCloudRespopnse<GetTotalMileageAndPackage>>() {
         });
-        GetTotalMileageAndPackage totalMil = resp.getBody();
         QueryVehicleTotalInfo totalInfo = new QueryVehicleTotalInfo();
-
         totalInfo.setCumulativeTotalMileage(String.valueOf(totalMil.getMileage()));//总里程数
         totalInfo.setOnlineVehicle(String.valueOf(totalMil.getOnlineNum()));//在线车辆
         totalInfo.setRunningVehicle(String.valueOf(totalMil.getDriveNum()));//行驶车辆

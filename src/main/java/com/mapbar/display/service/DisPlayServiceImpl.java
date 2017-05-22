@@ -30,7 +30,7 @@ public class DisPlayServiceImpl extends BaseService implements IDisplayService{
     public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception{
         String numBit = req.getNumBits();
         // 请求位置云
-        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest("localcloud.getLocationData",new TypeReference<List<LocationDataResp>>(){});
+        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("localcloud.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
         int size = resp.size();
         List<PolymerizeDto> dtoList = new ArrayList<>(size);
         for (LocationDataResp data : resp){
@@ -49,8 +49,9 @@ public class DisPlayServiceImpl extends BaseService implements IDisplayService{
     public List<GetServiceStatisticsResp> getServiceStatistics(GetServiceStatisticsReq req) throws Exception{
         // 拼接url
         String getUrl = HttpUtil.getUrl(UrlProperties.getUrl("localcloud.serverStations"), req);
-        List<DistrictNumberResp> cloudResp = HttpUtil.getLocalCloudJsonRequest(getUrl, new TypeReference<List<DistrictNumberResp>>() {
+        DistrictResp cloudRespBody = HttpUtil.getLocalCloudJsonRequest(getUrl, new TypeReference<LocalCloudRespopnse<DistrictResp>>() {
         });
+        List<DistrictNumberResp> cloudResp = cloudRespBody.getDistrictList();
         int size = cloudResp.size();
         List<GetServiceStatisticsResp> resp = new ArrayList<GetServiceStatisticsResp>(size);
 
@@ -71,7 +72,7 @@ public class DisPlayServiceImpl extends BaseService implements IDisplayService{
             ServerStationInfo info = (ServerStationInfo)dao.sqlFindObject(sqlStr,command,ServerStationInfo.class);
             ssRes.setDistrict(String.valueOf(dictNumberObj.getDistrict()));
             ssRes.setNumber(String.valueOf(dictNumberObj.getNumber()));
-            if (null == info){
+            if (null != info){
                 ssRes.setDistrictName(info.getStaName());
             }
             resp.add(ssRes);

@@ -34,13 +34,15 @@ public final class HttpUtil {
 
 
 	private static final String CONTENT_TYPE = "Content-Type";
-	
+	private static final String ACCEPT_TYPE = "Accept";
+
 	private static final String APPLICATION_JSON = "application/json";
 	private static final String APPLICATION_JSON_UTF8 = "application/json; charset=utf-8";
 	
 	private static final String TEXT_XML = "text/xml";
 	private static final String TEXT_XML_UTF8 = "text/xml; charset=utf-8";
-	
+	private static final String ACCEPT = "application/json";
+
 	private static final String TEXT_NORMAL = "application/x-www-form-urlencoded; charset=utf-8";
 	
 	private static final int OK = 200;
@@ -158,6 +160,7 @@ public final class HttpUtil {
 			setReqHeaders(headers, httpMethod);
 		}
 		httpMethod.setRequestHeader(CONTENT_TYPE, APPLICATION_JSON_UTF8);
+		httpMethod.setRequestHeader(ACCEPT_TYPE, ACCEPT);
 		// 发送含xml消息体的对象
 		try {
 			// 执行请求并接收响应码
@@ -191,13 +194,13 @@ public final class HttpUtil {
 	}
 
 
-	public static <T> T getLocalCloudJsonRequest(String url, TypeReference<T> valueTypeRef) {
+	public static <T> T getLocalCloudJsonRequest(String url, TypeReference<LocalCloudRespopnse<T>> valueTypeRef) {
 		Assert.hasLength(url, "请求url不能为空字符串。");
 
 		HttpMethodBase httpMethod = new GetMethod(url);
 
 		httpMethod.setRequestHeader(CONTENT_TYPE, APPLICATION_JSON_UTF8);
-		// 发送含xml消息体的对象
+		httpMethod.setRequestHeader(ACCEPT_TYPE, ACCEPT);
 		try {
 			// 执行请求并接收响应码
 			int resultCode = httpClient.executeMethod(httpMethod);
@@ -205,11 +208,11 @@ public final class HttpUtil {
 			String respStr = httpMethod.getResponseBodyAsString();
 			if (resultCode == OK) {
 				// 响应体
-				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(respStr, valueTypeRef);
+				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(respStr,valueTypeRef);
 				int businesCode = rep.getResultCode();
 				T data = null;
 				switch (businesCode){
-					case OK : data = rep.getData();
+					case OK : data = rep.getData(); break;
 					case PARAM_ERROR : throw new LocalCloudParamErrorException();
 					case CONNECT_REFUSED : throw new LocalCloudRefusedException();
 					case SERVER_ERROR : throw new LocalCloudServerErrorException();

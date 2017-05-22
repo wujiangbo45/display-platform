@@ -8,6 +8,10 @@ public class LocalCloudRespopnse<T> extends BaseResp{
     private T data;
 
 
+    LocalCloudRespopnse(){
+
+    }
+
     LocalCloudRespopnse (T data){
         this.data = data;
     }
