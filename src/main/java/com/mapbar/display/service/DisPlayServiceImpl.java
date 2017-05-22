@@ -1,6 +1,7 @@
 package com.mapbar.display.service;
 
 import com.mapbar.display.dto.*;
+import com.mapbar.display.service.base.BaseService;
 import com.mapbar.display.util.*;
 import com.mapbar.display.util.http.HttpUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Create: 2017/05/22 9:34
  */
 @Service
-public class DisPlayServiceImpl implements IDisplayService{
+public class DisPlayServiceImpl extends BaseService implements IDisplayService{
 
 
     @Autowired
@@ -41,5 +42,7 @@ public class DisPlayServiceImpl implements IDisplayService{
         List<PolymerizeResult> result = polymerizeService.getPolymerizeResult(dtoList,Integer.parseInt(numBit));
         return CoordinateInfoUtil.castPolymerizeToResp(result);
     }
+
+
 
 }

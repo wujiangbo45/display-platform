@@ -1,11 +1,13 @@
 package com.mapbar.display.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.mapbar.display.command.TdsInCommand;
 import com.mapbar.display.command.TdsOutCommand;
 import com.mapbar.display.repository.HyCarRepository;
 import com.mapbar.display.result.CommonResult;
 import com.mapbar.display.result.ReturnCode;
+import com.mapbar.display.service.base.BaseService;
 import com.mapbar.display.util.HttpUtil;
 import com.mapbar.display.util.JsonUtil;
 import com.mapbar.display.util.RedisUtil;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Service;
  * Created by yinsihua on 2017/5/2.
  */
 @Service
-public class TdsService {
+public class TdsService extends BaseService{
     private static final Logger logger = LoggerFactory.getLogger(TdsService.class);
 
     @Value("${tdsInUrl}")
@@ -99,8 +101,5 @@ public class TdsService {
 
     }
 
-    public void test(){
-        hyCarRepository.findByCarId(1L);
-        System.out.println(redisUtil.get("a"));
-    }
+
 }
