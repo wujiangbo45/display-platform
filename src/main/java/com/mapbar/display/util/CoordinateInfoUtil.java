@@ -3,6 +3,7 @@ package com.mapbar.display.util;
 import com.mapbar.display.dto.Features;
 import com.mapbar.display.dto.Geometry;
 import com.mapbar.display.dto.VehicleRealtimePositionResp;
+import com.mapbar.display.result.PolymerizeResult;
 
 import java.util.ArrayList;
 import java.util.List;

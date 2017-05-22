@@ -1,4 +1,4 @@
-package com.mapbar.display.common;
+package com.mapbar.display.common.bind;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

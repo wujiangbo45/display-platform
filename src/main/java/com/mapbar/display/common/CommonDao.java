@@ -1,5 +1,6 @@
 package com.mapbar.display.common;
 
+import com.mapbar.display.common.base.BaseDao;
 import com.mapbar.display.result.PagingInfo;
 import com.mapbar.display.util.JpaUtil;
 import org.hibernate.SQLQuery;

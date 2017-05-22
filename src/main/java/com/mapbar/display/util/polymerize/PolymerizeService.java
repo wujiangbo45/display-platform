@@ -1,6 +1,7 @@
-package com.mapbar.display.util;
+package com.mapbar.display.util.polymerize;
 
 import com.mapbar.display.dto.PolymerizeDto;
+import com.mapbar.display.result.PolymerizeResult;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,7 +28,7 @@ public class PolymerizeService {
 
     private final double EARTH_RADIUS = 6378.137;
 
-    public List<PolymerizeResult> getPolymerizeResult(List<PolymerizeDto> latLon,Integer numBits) {
+    public List<PolymerizeResult> getPolymerizeResult(List<PolymerizeDto> latLon, Integer numBits) {
         Set<String> setGeoHash = new HashSet<>();
         List<PolymerizeResult> polymerizeList = new ArrayList<PolymerizeResult>();
         HashMap<String,Integer> countMap = new HashMap<String, Integer>();

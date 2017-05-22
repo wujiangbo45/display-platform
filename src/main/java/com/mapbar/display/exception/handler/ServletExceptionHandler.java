@@ -4,7 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.mapbar.display.exception.ErrorCode;
-import com.mapbar.display.result.GenericResponse;
+import com.mapbar.display.common.bind.GenericResponse;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.HttpRequestMethodNotSupportedException;

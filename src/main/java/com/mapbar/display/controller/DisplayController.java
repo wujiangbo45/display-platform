@@ -1,6 +1,6 @@
 package com.mapbar.display.controller;
 
-import com.mapbar.display.common.GenericResponseBody;
+import com.mapbar.display.common.bind.GenericResponseBody;
 import com.mapbar.display.dto.GetServiceStatisticsReq;
 import com.mapbar.display.dto.GetServiceStatisticsResp;
 import com.mapbar.display.dto.VehicleRealtimePositionReq;
@@ -11,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author: wujiangbo

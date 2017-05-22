@@ -1,4 +1,4 @@
-package com.mapbar.display.util;
+package com.mapbar.display.result;
 
 /**
  * 聚合输出结果

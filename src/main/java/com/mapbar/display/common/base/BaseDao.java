@@ -1,4 +1,4 @@
-package com.mapbar.display.common;
+package com.mapbar.display.common.base;
 
 import com.mapbar.display.util.sqlLaber.SqlLaberUtil;
 import org.springframework.beans.factory.annotation.Autowired;

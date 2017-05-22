@@ -1,6 +1,7 @@
-package com.mapbar.display.common;
+package com.mapbar.display.common.servlet;
 
-import com.mapbar.display.result.GenericResponse;
+import com.mapbar.display.common.bind.GenericResponse;
+import com.mapbar.display.common.bind.GenericResponseBody;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.converter.HttpMessageConverter;

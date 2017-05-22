@@ -1,4 +1,4 @@
-package com.mapbar.display.common;
+package com.mapbar.display.common.servlet;
 
 import java.util.ArrayList;
 import java.util.List;

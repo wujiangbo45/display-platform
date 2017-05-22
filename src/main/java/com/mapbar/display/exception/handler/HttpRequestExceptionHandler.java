@@ -6,7 +6,7 @@ import com.mapbar.display.exception.http.HttpBusinessFailureException;
 import com.mapbar.display.exception.http.HttpMessageTransferException;
 import com.mapbar.display.exception.http.HttpRequestException;
 import com.mapbar.display.exception.http.HttpRequestNotSuccessException;
-import com.mapbar.display.result.GenericResponse;
+import com.mapbar.display.common.bind.GenericResponse;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 

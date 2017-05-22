@@ -1,7 +1,7 @@
 package com.mapbar.display;
 
-import com.mapbar.display.common.AccessLoggerFilter;
-import com.mapbar.display.common.GenericResponseBodyMethodProcessorRegister;
+import com.mapbar.display.filter.AccessLoggerFilter;
+import com.mapbar.display.common.servlet.GenericResponseBodyMethodProcessorRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 
 /**

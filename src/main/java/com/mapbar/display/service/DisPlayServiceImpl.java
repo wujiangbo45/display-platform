@@ -3,12 +3,12 @@ package com.mapbar.display.service;
 import com.mapbar.display.command.ServerStationCommand;
 import com.mapbar.display.common.UrlProperties;
 import com.mapbar.display.dto.*;
+import com.mapbar.display.result.PolymerizeResult;
 import com.mapbar.display.service.base.BaseService;
 import com.mapbar.display.util.*;
 import com.mapbar.display.util.http.HttpUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.springframework.beans.BeanUtils;
+import com.mapbar.display.util.polymerize.PolymerizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

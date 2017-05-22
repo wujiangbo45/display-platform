@@ -1,4 +1,4 @@
-package com.mapbar.display.result;
+package com.mapbar.display.common.bind;
 
 /**
  * @Author: wujiangbo

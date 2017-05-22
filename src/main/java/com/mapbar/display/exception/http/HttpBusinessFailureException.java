@@ -1,6 +1,6 @@
 package com.mapbar.display.exception.http;
 
-import com.mapbar.display.result.GenericResponse;
+import com.mapbar.display.common.bind.GenericResponse;
 import org.springframework.util.Assert;
 
 
