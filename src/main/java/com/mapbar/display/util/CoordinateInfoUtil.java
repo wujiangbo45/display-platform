@@ -9,15 +9,13 @@ import java.util.List;
 
 /**
  * Created by wangjc on 2017/5/19.
- * 聚合点车辆坐标和数量的返回
  */
 public class CoordinateInfoUtil {
-    public List<VehicleRealtimePositionResp> getCarInfo(List<PolymerizeResult> coorList){
+    public static VehicleRealtimePositionResp castPolymerizeToResp(List<PolymerizeResult> coorList){
 
-        List<VehicleRealtimePositionResp> list = new ArrayList<VehicleRealtimePositionResp>();
+        VehicleRealtimePositionResp resp = new VehicleRealtimePositionResp();
+        List<Features> f = new ArrayList<>();
         for(int i = 0;i < coorList.size();i ++){
-            VehicleRealtimePositionResp resp = new VehicleRealtimePositionResp();
-            List<Features> f = new ArrayList<>();
             Features d = new Features();
             Geometry g = new Geometry();
             g.setCoordinates(coorList.get(i).getLat(), coorList.get(i).getLon());
@@ -28,9 +26,8 @@ public class CoordinateInfoUtil {
                 d.setProperties("0");
             }
             f.add(d);
-            resp.setFeatures(f);
-            list.add(resp);
         }
-        return list;
+        resp.setFeatures(f);
+        return resp;
     }
 }

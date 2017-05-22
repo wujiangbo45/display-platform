@@ -1,13 +1,15 @@
 package com.mapbar.display.service;
 
-import com.mapbar.display.dto.LocalCloudRespopnse;
-import com.mapbar.display.dto.LocationDataResp;
-import com.mapbar.display.dto.VehicleRealtimePositionReq;
-import com.mapbar.display.dto.VehicleRealtimePositionResp;
+import com.mapbar.display.dto.*;
+import com.mapbar.display.util.*;
 import com.mapbar.display.util.http.HttpUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,17 +19,27 @@ import java.util.List;
 @Service
 public class DisPlayServiceImpl implements IDisplayService{
 
+
+    @Autowired
+    PolymerizeService polymerizeService;
+
     @Override
     public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req) {
         String numBit = req.getNumBits();
         // 请求位置云
         List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest("",new TypeReference<List<LocationDataResp>>(){});
-
         int size = resp.size();
-
+        List<PolymerizeDto> dtoList = new ArrayList<>(size);
+        for (LocationDataResp data : resp){
+            PolymerizeDto dto = new PolymerizeDto();
+            dto.setLat(data.getLat());
+            dto.setLon(data.getLng());
+            dto.setPropertyInfo("1");
+            dtoList.add(dto);
+        }
         // 进行聚合
-
-
-        return null;
+        List<PolymerizeResult> result = polymerizeService.getPolymerizeResult(dtoList,Integer.parseInt(numBit));
+        return CoordinateInfoUtil.castPolymerizeToResp(result);
     }
+
 }
