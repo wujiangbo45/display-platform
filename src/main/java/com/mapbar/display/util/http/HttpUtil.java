@@ -164,7 +164,8 @@ public final class HttpUtil {
 			int resultCode = httpClient.executeMethod(httpMethod);
 			
 			String respStr = httpMethod.getResponseBodyAsString();
-			if (resultCode == OK) {
+
+			if (OK == resultCode) {
 				// 响应头
 				Map<String, String> respHeaders = getRespHeaders(httpMethod);
 				// 响应体
@@ -205,7 +206,7 @@ public final class HttpUtil {
 			if (resultCode == OK) {
 				// 响应体
 				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(respStr, valueTypeRef);
-				int businesCode = rep.getCode();
+				int businesCode = rep.getResultCode();
 				T data = null;
 				switch (businesCode){
 					case OK : data = rep.getData();
