@@ -1,7 +1,11 @@
 package com.mapbar.display.service;
 
+import com.mapbar.display.dto.GetServiceStatisticsReq;
+import com.mapbar.display.dto.GetServiceStatisticsResp;
 import com.mapbar.display.dto.VehicleRealtimePositionReq;
 import com.mapbar.display.dto.VehicleRealtimePositionResp;
+
+import java.util.List;
 
 /**
  * @Author: wujiangbo
@@ -9,6 +13,8 @@ import com.mapbar.display.dto.VehicleRealtimePositionResp;
  */
 public interface IDisplayService {
 
-    public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req);
+    public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception;
+
+    public List<GetServiceStatisticsResp> getServiceStatistics(GetServiceStatisticsReq req) throws Exception;
 
 }

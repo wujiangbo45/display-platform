@@ -1,17 +1,18 @@
 package com.mapbar.display.controller;
 
-import com.mapbar.display.command.TestCommand;
 import com.mapbar.display.common.GenericResponseBody;
-import com.mapbar.display.common.UrlProperties;
+import com.mapbar.display.dto.GetServiceStatisticsReq;
+import com.mapbar.display.dto.GetServiceStatisticsResp;
 import com.mapbar.display.dto.VehicleRealtimePositionReq;
+import com.mapbar.display.dto.VehicleRealtimePositionResp;
 import com.mapbar.display.service.IDisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,10 +30,17 @@ public class DisplayController {
 
     @RequestMapping(value = "/queryVehicleRealtimePosition")
     @GenericResponseBody
-    public Map<String,String> queryVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception {
-        service.getVehicleRealtimePosition(req);
-        Map<String, String> result = new HashMap<String, String>();
-        result.put("key", "hello, word!!!");
-        return result;
+    public VehicleRealtimePositionResp queryVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception {
+        VehicleRealtimePositionResp resp = service.getVehicleRealtimePosition(req);
+        return resp;
     }
+
+
+    @RequestMapping(value = "/queryServiceStatistics")
+    @GenericResponseBody
+    public List<GetServiceStatisticsResp> queryServiceStatistics(GetServiceStatisticsReq req) throws Exception {
+        return service.getServiceStatistics(req);
+    }
+
+
 }
