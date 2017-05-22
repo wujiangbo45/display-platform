@@ -3,9 +3,17 @@
 *.iml
 .idean
 .idea/
+.idea/*
 .settings/
 out/
 .project
 *.classpath
 logs/
 *.log
+target/classes/application-local.properties
+target/classes/com/
+target/classes/dynamicsql/
+target/classes/url.properties
+target/generated-sources/
+target/generated-test-sources/
+target/test-classes/
