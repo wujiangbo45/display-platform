@@ -2,6 +2,7 @@ package com.mapbar.display.controller;
 
 import com.mapbar.display.command.TestCommand;
 import com.mapbar.display.common.GenericResponseBody;
+import com.mapbar.display.common.UrlProperties;
 import com.mapbar.display.dto.VehicleRealtimePositionReq;
 import com.mapbar.display.service.IDisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,12 @@ public class DisplayController {
     @Autowired
     IDisplayService service;
 
-
     @RequestMapping(value = "/queryVehicleRealtimePosition")
     @GenericResponseBody
     public Map<String,String> queryVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception {
-//        command.getToken();
         service.getVehicleRealtimePosition(req);
         Map<String, String> result = new HashMap<String, String>();
         result.put("key", "hello, word!!!");
-//        tdsService.test();
         return result;
     }
 }
