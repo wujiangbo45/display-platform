@@ -1,30 +1,28 @@
 package com.mapbar.display.util.http;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Charsets;
 import com.mapbar.display.common.Const;
 import com.mapbar.display.dto.LocalCloudRespopnse;
+import com.mapbar.display.dto.LocationDataResp;
 import com.mapbar.display.exception.http.*;
+import com.mapbar.display.util.JsonUtil;
 import com.mapbar.display.util.JsonUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.StatusLine;
+import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.util.Assert;
-
 
 /**
  * http调用工具类
@@ -239,7 +237,7 @@ public final class HttpUtil {
 	 * @modify author:修改人
 	 * Modify on 修改时间
 	 */
-	public static String getResponseHeader(String url, String respHeaderName) {
+	private static String getResponseHeader(String url, String respHeaderName) {
 		return getResponseHeader(url, respHeaderName, HttpServletResponse.SC_OK);
 	}
 	
@@ -254,7 +252,7 @@ public final class HttpUtil {
 	 * @modify author:修改人
 	 * Modify on 修改时间
 	 */
-	public static String getResponseHeader(String url, String respHeaderName, int expectStatusCode) {
+	private static String getResponseHeader(String url, String respHeaderName, int expectStatusCode) {
 		Assert.hasLength(url);
 		Assert.hasLength(respHeaderName);
 		
@@ -329,8 +327,21 @@ public final class HttpUtil {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		HttpEntity<Map> entity = HttpUtil.getJsonRequest("http://localhost:8080/tds/test?token=1",new HashMap<String, String>(),Map.class);
-		System.out.println(entity.getBody());
+	public static String getUrl(String url, Object t) throws IOException {
+		return url + "?" + getRequestParam(getParam(t));
 	}
+
+	private static Map<String,Object> getParam(Object obj) throws IOException {
+		return JsonUtil.toMap(JsonUtils.toJson(obj));
+	}
+
+	private static String getRequestParam(Map<String,Object> map){
+		List<BasicNameValuePair> params = new ArrayList<>();
+		Set<Map.Entry<String,Object>> mapSet = map.entrySet();
+		for (Map.Entry<String,Object> entry: mapSet){
+			params.add(new BasicNameValuePair(entry.getKey(), String.valueOf(entry.getValue())));
+		}
+		return URLEncodedUtils.format(params,"UTF-8");
+	}
+
 }
