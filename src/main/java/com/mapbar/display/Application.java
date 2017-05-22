@@ -1,12 +1,15 @@
 package com.mapbar.display;
 
+import com.mapbar.display.common.AccessLoggerFilter;
 import com.mapbar.display.common.GenericResponseBodyMethodProcessorRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 
 /**
@@ -22,6 +25,9 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	GenericResponseBodyMethodProcessorRegister res;
+
+	@Autowired
+	AccessLoggerFilter filter;
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
@@ -29,6 +35,8 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		res.afterPropertiesSet();
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		registrationBean.setFilter(filter);
 		System.out.println("启动完毕...");
 	}
 
