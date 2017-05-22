@@ -30,8 +30,6 @@ public class CoordinateInfoUtil {
             f.add(d);
             resp.setFeatures(f);
             list.add(resp);
-
-
         }
         return list;
     }
