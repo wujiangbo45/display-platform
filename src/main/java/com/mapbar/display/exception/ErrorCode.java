@@ -3,7 +3,7 @@ package com.mapbar.display.exception;
 
 /**
  * 错误码常量类
- * @author:吴永奎
+ * @author:wujiangbo
  * Created on 2016年3月15日 下午2:20:10
  * @modify author:修改人
  * Modify on 修改时间

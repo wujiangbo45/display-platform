@@ -1,4 +1,4 @@
-package com.mapbar.display.exception;
+package com.mapbar.display.exception.http;
 
 import com.mapbar.display.result.GenericResponse;
 import org.springframework.util.Assert;

@@ -2,38 +2,27 @@ package com.mapbar.display.util.http;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.common.base.Charsets;
 import com.mapbar.display.common.Const;
-import com.mapbar.display.exception.HttpMessageTransferException;
-import com.mapbar.display.exception.HttpRequestNotSuccessException;
+import com.mapbar.display.exception.http.HttpMessageTransferException;
+import com.mapbar.display.exception.http.HttpRequestNotSuccessException;
 import com.mapbar.display.util.JsonUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -153,7 +142,7 @@ public final class HttpUtil {
 	 * @param headers 请求头
 	 * @param respBodyClass 响应体类型
 	 * @return 返回的响应结果
-	 * @author:吴永奎
+	 * @author:wujiangbo
 	 * Created on 2015年8月19日 下午2:06:53
 	 */
 	public static <T> HttpEntity<T> getJsonRequest(String url, Map<String, String> headers,
@@ -173,9 +162,9 @@ public final class HttpUtil {
 			
 			String respStr = httpMethod.getResponseBodyAsString();
 			if (resultCode == OK) {
-				//响应头
+				// 响应头
 				Map<String, String> respHeaders = getRespHeaders(httpMethod);
-				//响应体
+				// 响应体
 				HttpEntity<T> rep = null;
 				if (isNullOrEmpty(respStr)) {
 					rep = new HttpEntity<T>(respHeaders, null);;// 无响应
@@ -202,7 +191,7 @@ public final class HttpUtil {
 	 * @param url
 	 * @param respHeaderName respHeaderName 响应头名
 	 * @return respHeaderName对应的响应头值
-	 * @author:吴永奎
+	 * @author:wujiangbo
 	 * Created on 2016年4月6日 上午9:32:25
 	 * @modify author:修改人
 	 * Modify on 修改时间
@@ -280,7 +269,7 @@ public final class HttpUtil {
 	 * 
 	 * @param headers 要设置的请求头
 	 * @param httpMethod 接收请求头的http请求方法
-	 * @author:吴永奎
+	 * @author:wujiangbo
 	 * Created on 2015年8月19日 下午1:47:11
 	 */
 	private static void setReqHeaders(Map<String, String> headers, HttpMethodBase httpMethod) {

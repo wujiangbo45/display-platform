@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * http头与body的封装
  * 
- * @author:吴永奎
+ * @author:
  * Created on 2015年8月19日 下午1:38:00
 */
 public class HttpEntity<T> {

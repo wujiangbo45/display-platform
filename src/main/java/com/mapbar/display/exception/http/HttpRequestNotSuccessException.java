@@ -1,9 +1,11 @@
-package com.mapbar.display.exception;
+package com.mapbar.display.exception.http;
 
+
+import com.mapbar.display.exception.ErrorCode;
 
 /**
  * 返回状态码非200，抛出此异常。
- * @author:吴永奎
+ * @author:wujiangbo
  * Created on 2016年3月7日 下午4:53:24
  * @modify author:修改人
  * Modify on 修改时间

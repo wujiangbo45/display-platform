@@ -1,9 +1,9 @@
-package com.mapbar.display.exception;
+package com.mapbar.display.exception.http;
 
 /**
  * Http请求异常。
  * 
- * @author:吴永奎
+ * @author:wujiangbo
  * Created on 2015年8月19日 下午1:37:34
 */
 public abstract class HttpRequestException extends RuntimeException {
