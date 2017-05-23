@@ -5,22 +5,14 @@ import com.mapbar.display.util.JsonUtils;
 
 /**
  * Created by wangjc on 2017/5/22.
- * »ñÈ¡×ÜÀï³Ì×ÜÊý¾Ý°üÌõÊý
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 public class GetTotalMileageAndPackage {
-    private int resultCode;
     private long mileage;
     private long packageNum;
     private int onlineNum;
     private int driveNum;
 
-    public int getResultCode() {
-        return resultCode;
-    }
-
-    public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
-    }
 
     public long getMileage() {
         return mileage;
@@ -34,7 +26,7 @@ public class GetTotalMileageAndPackage {
         return packageNum;
     }
 
-    @JsonProperty("package")
+//    @JsonProperty("package")
     public void setPackageNum(long packageNum) {
         this.packageNum = packageNum;
     }
