@@ -217,22 +217,22 @@ public final class HttpUtil {
 			while((str = br.readLine()) != null){
 				stringBuilder.append(str);
 			}
-			if (resultCode == OK) {
+//			if (resultCode == OK) {
 				// 响应体
-				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(stringBuilder.toString(),valueTypeRef);
-				int businesCode = rep.getResultCode();
-				T data = null;
-				switch (businesCode){
-					case OK : data = rep.getData(); break;
-					case PARAM_ERROR : throw new LocalCloudParamErrorException(rep.getMessage());
-					case CONNECT_REFUSED : throw new LocalCloudRefusedException(rep.getMessage());
-					case SERVER_ERROR : throw new LocalCloudServerErrorException(rep.getMessage());
-				}
-				return data;
-			} else {
-				StatusLine staline = httpMethod.getStatusLine();
-				throw new HttpRequestNotSuccessException(staline.getStatusCode(), staline.getReasonPhrase());
+			LocalCloudRespopnse<T> rep = JsonUtils.fromJson(stringBuilder.toString(),valueTypeRef);
+			int businesCode = rep.getResultCode();
+			T data = null;
+			switch (businesCode){
+				case OK : data = rep.getData(); break;
+				case PARAM_ERROR : throw new LocalCloudParamErrorException(rep.getMessage());
+				case CONNECT_REFUSED : throw new LocalCloudRefusedException(rep.getMessage());
+				case SERVER_ERROR : throw new LocalCloudServerErrorException(rep.getMessage());
 			}
+			return data;
+//			} else {
+//				StatusLine staline = httpMethod.getStatusLine();
+//				throw new HttpRequestNotSuccessException(staline.getStatusCode(), staline.getReasonPhrase());
+//			}
 		} catch (IOException e) {
 			throw new HttpMessageTransferException(e);
 		} finally {
