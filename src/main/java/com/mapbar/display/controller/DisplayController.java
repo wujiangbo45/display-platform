@@ -51,11 +51,11 @@ public class DisplayController {
         GetTotalMileageAndPackage totalMil = HttpUtil.getLocalCloudJsonRequest(url, new TypeReference<LocalCloudRespopnse<GetTotalMileageAndPackage>>() {
         });
         QueryVehicleTotalInfo totalInfo = new QueryVehicleTotalInfo();
-        totalInfo.setCumulativeTotalMileage(String.valueOf(totalMil.getMileage()));//总里程数
-        totalInfo.setOnlineVehicle(String.valueOf(totalMil.getOnlineNum()));//在线车辆
-        totalInfo.setRunningVehicle(String.valueOf(totalMil.getDriveNum()));//行驶车辆
-        totalInfo.setUploadDataCount(String.valueOf(totalMil.getPackageNum()));//上报数据
-        totalInfo.setTotalVehicle(String.valueOf(qvtiService.getTotalVehicle()));//车辆总数
+        totalInfo.setCumulativeTotalMileage(String.valueOf(totalMil.getMileage()));
+        totalInfo.setOnlineVehicle(String.valueOf(totalMil.getOnlineNum()));
+        totalInfo.setRunningVehicle(String.valueOf(totalMil.getDriveNum()));
+        totalInfo.setUploadDataCount(String.valueOf(totalMil.getPackageNum()));
+        totalInfo.setTotalVehicle(String.valueOf(qvtiService.getTotalVehicle()));
 
         return totalInfo;
     }
