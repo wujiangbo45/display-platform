@@ -1,6 +1,9 @@
 package com.mapbar.display.util.http;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -205,10 +208,18 @@ public final class HttpUtil {
 			// 执行请求并接收响应码
 			int resultCode = httpClient.executeMethod(httpMethod);
 
-			String respStr = httpMethod.getResponseBodyAsString();
+//			String respStr = httpMethod.getResponseBodyAsString();
+
+			InputStream inputStream = httpMethod.getResponseBodyAsStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+			StringBuilder stringBuilder = new StringBuilder();
+			String str = "";
+			while((str = br.readLine()) != null){
+				stringBuilder.append(str);
+			}
 			if (resultCode == OK) {
 				// 响应体
-				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(respStr,valueTypeRef);
+				LocalCloudRespopnse<T> rep = JsonUtils.fromJson(stringBuilder.toString(),valueTypeRef);
 				int businesCode = rep.getResultCode();
 				T data = null;
 				switch (businesCode){
