@@ -2,7 +2,7 @@ package com.mapbar.display.dto;
 
 /**
  * Created by wangjc on 2017/5/22.
- * 查询车辆统计信息
+ *
  */
 public class QueryVehicleTotalInfo {
     private String cumulativeTotalMileage;
