@@ -11,21 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.common.base.Charsets;
 import com.mapbar.display.common.Const;
 import com.mapbar.display.dto.LocalCloudRespopnse;
-import com.mapbar.display.dto.LocationDataResp;
 import com.mapbar.display.exception.http.*;
 import com.mapbar.display.util.JsonUtil;
 import com.mapbar.display.util.JsonUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethodBase;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.StatusLine;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.springframework.util.Assert;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
-import org.springframework.util.Assert;
 
 /**
  * http调用工具类
