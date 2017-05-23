@@ -1,6 +1,7 @@
 package com.mapbar.display;
 
 import com.mapbar.common.MockMvcSpringContextTests;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -9,6 +10,7 @@ import org.junit.Test;
  */
 public class DisplayTest extends MockMvcSpringContextTests {
 
+    @Ignore
     @Test
     public void test() throws Exception {
         assertSuccess();
