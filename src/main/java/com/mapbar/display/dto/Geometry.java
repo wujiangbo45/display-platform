@@ -1,5 +1,7 @@
 package com.mapbar.display.dto;
 
+import java.util.Arrays;
+
 /**
  * @Author: wujiangbo
  * @Create: 2017/05/19 13:17
@@ -25,5 +27,13 @@ public class Geometry {
      */
     public void setCoordinates(double lon, double lat) {
         this.coordinates = new double[]{lon,lat};
+    }
+
+    @Override
+    public String toString() {
+        return "Geometry{" +
+                "type='" + type + '\'' +
+                ", coordinates=" + Arrays.toString(coordinates) +
+                '}';
     }
 }

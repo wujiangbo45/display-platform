@@ -38,4 +38,13 @@ public class PolymerizeDto implements Serializable {
     public void setPropertyInfo(String propertyInfo) {
         this.propertyInfo = propertyInfo;
     }
+
+    @Override
+    public String toString() {
+        return "PolymerizeDto{" +
+                "lat=" + lat +
+                ", lon=" + lon +
+                ", propertyInfo='" + propertyInfo + '\'' +
+                '}';
+    }
 }

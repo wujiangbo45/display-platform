@@ -30,4 +30,12 @@ public class LocationDataResp {
     public void setLng(double lng) {
         this.lng = lng;
     }
+
+    @Override
+    public String toString() {
+        return "LocationDataResp{" +
+                "lat=" + lat +
+                ", lng=" + lng +
+                '}';
+    }
 }

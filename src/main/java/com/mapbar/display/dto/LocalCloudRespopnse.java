@@ -34,4 +34,12 @@ public class LocalCloudRespopnse<T> extends BaseResp{
     public void setData(T data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "LocalCloudRespopnse{" +
+                "message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

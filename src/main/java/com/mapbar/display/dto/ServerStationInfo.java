@@ -25,4 +25,12 @@ public class ServerStationInfo {
     public void setStaName(String staName) {
         this.staName = staName;
     }
+
+    @Override
+    public String toString() {
+        return "ServerStationInfo{" +
+                "id='" + id + '\'' +
+                ", staName='" + staName + '\'' +
+                '}';
+    }
 }

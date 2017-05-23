@@ -40,4 +40,13 @@ public class Features {
     public void setProperties(String number) {
         this.properties.put("number",number);
     }
+
+    @Override
+    public String toString() {
+        return "Features{" +
+                "type='" + type + '\'' +
+                ", geometry=" + geometry +
+                ", properties=" + properties +
+                '}';
+    }
 }

@@ -35,4 +35,13 @@ public class GetServiceStatisticsResp {
     public void setDistrictName(String districtName) {
         this.districtName = districtName;
     }
+
+    @Override
+    public String toString() {
+        return "GetServiceStatisticsResp{" +
+                "district='" + district + '\'' +
+                ", districtName='" + districtName + '\'' +
+                ", number='" + number + '\'' +
+                '}';
+    }
 }

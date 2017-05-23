@@ -50,4 +50,15 @@ public class QueryVehicleTotalInfo {
     public void setCumulativeTotalMileage(String cumulativeTotalMileage) {
         this.cumulativeTotalMileage = cumulativeTotalMileage;
     }
+
+    @Override
+    public String toString() {
+        return "QueryVehicleTotalInfo{" +
+                "cumulativeTotalMileage='" + cumulativeTotalMileage + '\'' +
+                ", totalVehicle='" + totalVehicle + '\'' +
+                ", onlineVehicle='" + onlineVehicle + '\'' +
+                ", runningVehicle='" + runningVehicle + '\'' +
+                ", uploadDataCount='" + uploadDataCount + '\'' +
+                '}';
+    }
 }

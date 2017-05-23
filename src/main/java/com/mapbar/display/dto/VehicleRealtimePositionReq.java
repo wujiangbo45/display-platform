@@ -14,4 +14,11 @@ public class VehicleRealtimePositionReq {
     public void setNumBits(String numBits) {
         this.numBits = numBits;
     }
+
+    @Override
+    public String toString() {
+        return "VehicleRealtimePositionReq{" +
+                "numBits='" + numBits + '\'' +
+                '}';
+    }
 }

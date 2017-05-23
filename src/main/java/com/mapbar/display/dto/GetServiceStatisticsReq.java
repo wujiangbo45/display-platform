@@ -56,4 +56,15 @@ public class GetServiceStatisticsReq {
     public void setDistrictType(int districtType) {
         this.districtType = districtType;
     }
+
+
+    @Override
+    public String toString() {
+        return "GetServiceStatisticsReq{" +
+                "beginDate='" + beginDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", district=" + district +
+                ", districtType=" + districtType +
+                '}';
+    }
 }

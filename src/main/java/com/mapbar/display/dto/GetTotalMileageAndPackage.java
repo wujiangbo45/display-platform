@@ -47,4 +47,13 @@ public class GetTotalMileageAndPackage {
         this.driveNum = driveNum;
     }
 
+    @Override
+    public String toString() {
+        return "GetTotalMileageAndPackage{" +
+                "mileage=" + mileage +
+                ", packageNum=" + packageNum +
+                ", onlineNum=" + onlineNum +
+                ", driveNum=" + driveNum +
+                '}';
+    }
 }

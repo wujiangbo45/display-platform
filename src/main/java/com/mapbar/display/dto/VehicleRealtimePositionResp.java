@@ -25,4 +25,12 @@ public class VehicleRealtimePositionResp {
     public void setFeatures(List<Features> features) {
         this.features = features;
     }
+
+    @Override
+    public String toString() {
+        return "VehicleRealtimePositionResp{" +
+                "type='" + type + '\'' +
+                ", features=" + features +
+                '}';
+    }
 }

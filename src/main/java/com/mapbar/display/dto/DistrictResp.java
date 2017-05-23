@@ -27,4 +27,12 @@ public class DistrictResp {
     public void setDistrictList(List<DistrictNumberResp> districtList) {
         this.districtList = districtList;
     }
+
+    @Override
+    public String toString() {
+        return "DistrictResp{" +
+                "type=" + type +
+                ", districtList=" + districtList +
+                '}';
+    }
 }
