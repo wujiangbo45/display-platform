@@ -195,7 +195,7 @@ public final class HttpUtil {
 
 
 	public static <T> T getLocalCloudJsonRequest(String url, TypeReference<LocalCloudRespopnse<T>> valueTypeRef) {
-		Assert.hasLength(url, "请求url不能为空字符串。");
+ 		Assert.hasLength(url, "请求url不能为空字符串。");
 
 		HttpMethodBase httpMethod = new GetMethod(url);
 
