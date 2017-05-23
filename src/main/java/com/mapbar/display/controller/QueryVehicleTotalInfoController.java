@@ -1,6 +1,7 @@
 package com.mapbar.display.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.mapbar.display.common.UrlProperties;
 import com.mapbar.display.common.bind.GenericResponseBody;
 import com.mapbar.display.dto.GetTotalMileageAndPackage;
 import com.mapbar.display.dto.LocalCloudRespopnse;
@@ -31,7 +32,8 @@ public class QueryVehicleTotalInfoController {
     @RequestMapping(value = "/totalInfo")
     @GenericResponseBody
     public QueryVehicleTotalInfo totalInfo() throws Exception {
-        GetTotalMileageAndPackage totalMil = HttpUtil.getLocalCloudJsonRequest("", new TypeReference<LocalCloudRespopnse<GetTotalMileageAndPackage>>() {
+        String url = UrlProperties.getUrl("localcloud.getTotalMileageAndPackage");
+        GetTotalMileageAndPackage totalMil = HttpUtil.getLocalCloudJsonRequest(url, new TypeReference<LocalCloudRespopnse<GetTotalMileageAndPackage>>() {
         });
         QueryVehicleTotalInfo totalInfo = new QueryVehicleTotalInfo();
         totalInfo.setCumulativeTotalMileage(String.valueOf(totalMil.getMileage()));//总里程数
