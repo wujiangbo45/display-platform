@@ -1,7 +1,6 @@
 package com.mapbar.display.filter;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,16 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.mapbar.display.util.JsonUtils;
-import jdk.internal.org.objectweb.asm.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
  * 访问记录器
- * @author:wujiangbo
+ * @author: wujiangbo
  * Created on 2016年3月11日 上午9:48:30
  * @modify author:修改人
  * Modify on 修改时间
