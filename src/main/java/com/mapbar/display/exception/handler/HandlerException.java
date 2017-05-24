@@ -1,6 +1,7 @@
 package com.mapbar.display.exception.handler;
 
 import com.mapbar.display.exception.ErrorCode;
+import com.mapbar.display.exception.business.TokenExpireException;
 import com.mapbar.display.exception.business.UserCheckException;
 import com.mapbar.display.exception.http.HttpRequestException;
 import com.mapbar.display.exception.http.LocalCloudException;
@@ -129,5 +130,16 @@ public class HandlerException {
         String msg = messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
         return new GenericResponse<>(code,msg,null);
     }
+
+    @ExceptionHandler(TokenExpireException.class)
+    @ResponseBody
+    public GenericResponse<?> handleTokenExpireException(HttpServletRequest request, TokenExpireException ex){
+        logger.error("TokenExpireException exception", ex);
+        String code = ex.getCode();
+        String msg = messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+        return new GenericResponse<>(code,msg,null);
+    }
+
+
 
 }

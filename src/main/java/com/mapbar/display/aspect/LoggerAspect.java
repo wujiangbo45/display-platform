@@ -1,16 +1,14 @@
 package com.mapbar.display.aspect;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
@@ -27,11 +25,13 @@ public class LoggerAspect {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     @Pointcut("execution(* com.mapbar.display.controller..*(..))")
+    @Order(0)
     public void controllerLogger(){
 
     }
 
     @Pointcut("execution(* com.mapbar.display.service..*(..))")
+    @Order(2)
     public void serviceLogger(){
 
     }

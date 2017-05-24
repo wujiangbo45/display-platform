@@ -70,8 +70,8 @@ public class LoginService {
                     redisUtil.delete("stoken_" + oldToken);
                 }
                 // 存入redis
-                redisUtil.set(uKey, token);//用户对应的token
-                redisUtil.set(tKey, json);//token对应的用户信息
+                redisUtil.set(uKey, token, 30L);//用户对应的token
+                redisUtil.set(tKey, json,30L);//token对应的用户信息
 
             } else {
                 throw new UserCheckException(ErrorCode.ERROR_PASSWD);

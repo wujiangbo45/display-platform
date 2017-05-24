@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
  * @Author: wujiangbo
  * @Create: 2017/05/22 9:46
  */
-public class VehicleRealtimePositionReq {
+public class VehicleRealtimePositionReq extends TokenReq{
 
     @NotNull(message = "地图精度不能为空")
     @NotBlank(message = "地图精度不能为空")
