@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -43,7 +44,7 @@ public class DisplayController {
 
     @RequestMapping(value = "/queryServiceStatistics")
     @GenericResponseBody
-    public List<GetServiceStatisticsResp> queryServiceStatistics(GetServiceStatisticsReq req) throws Exception {
+    public List<GetServiceStatisticsResp> queryServiceStatistics(@Valid GetServiceStatisticsReq req) throws Exception {
         return service.getServiceStatistics(req);
     }
 
