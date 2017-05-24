@@ -22,8 +22,9 @@
     <sql-query name="queryLoginInfoSql">
         <![CDATA[
           SELECT
-            ha.ACCOUNT_NAME AS accountName,
-            ha.ACCOUNT_NICKNAME AS accountNickName
+            ha.ACCOUNT_NAME AS accountname,
+            ha.ACCOUNT_PWD AS accountpwd,
+            ha.ACCOUNT_NICKNAME AS realname
           FROM
             hy_account ha
           WHERE

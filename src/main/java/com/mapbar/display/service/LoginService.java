@@ -8,6 +8,7 @@ import com.mapbar.display.exception.ErrorCode;
 import com.mapbar.display.exception.business.UserCheckException;
 import com.mapbar.display.result.CommonResult;
 import com.mapbar.display.result.ReturnCode;
+import com.mapbar.display.service.base.BaseService;
 import com.mapbar.display.util.JsonUtil;
 import com.mapbar.display.util.MD5Util;
 import com.mapbar.display.util.RedisUtil;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ import java.util.List;
  * Created by suixin on 2017/5/19.
  */
 @Service
-public class LoginService {
+public class LoginService extends BaseService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
@@ -41,16 +43,13 @@ public class LoginService {
      * @param command
      * @return
      */
+    @Transactional
     public HyAccountDto login(LoginInCommand command) throws Exception{
         CommonResult result = new CommonResult();
-        result.fillResult(ReturnCode.OK);
-        HyAccountDto hyAccountDto;
         // 查询用户信息
-        List<HyAccountDto> dtoList = dao.sqlFind("queryLoginInfoSql", command, HyAccountDto.class);
-        if (null != dtoList && !dtoList.isEmpty() && command.getUsername().equals(dtoList.get(0).getAccountName())) {
-            // 用户信息
-            hyAccountDto = dtoList.get(0);
-
+        HyAccountDto hyAccountDto = (HyAccountDto)dao.sqlFindObject("queryLoginInfoSql", command, HyAccountDto.class);
+        if (null != hyAccountDto && command.getUsername().equals(hyAccountDto.getAccountname())) {
+            accountPwd = hyAccountDto.getAccountpwd();
             // 密码md5加密校验
             MD5Util md5Util = new MD5Util();
             if (md5Util.checkPasswordAndUserPwd(command.getPassword(), accountPwd)) {

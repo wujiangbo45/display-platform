@@ -1,34 +1,49 @@
 package com.mapbar.display.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
  * Created by suixin on 2017/5/22.
  */
-public class HyAccountDto implements Serializable {
+public class HyAccountDto extends BaseDTOV1 implements Serializable {
     // 账号名
-    private String accountName;
+    @JsonIgnore
+    private String accountname;
+
+    // 用户密码
+    @JsonIgnore
+    private String accountpwd;
 
     // 昵称
-    private String accountNickName;
+    private String realname;
 
     // 用户标记
     private String token;
 
-    public String getAccountNickName() {
-        return accountNickName;
+    public String getAccountname() {
+        return accountname;
     }
 
-    public void setAccountNickName(String accountNickName) {
-        accountNickName = accountNickName;
+    public void setAccountname(String accountname) {
+        this.accountname = accountname;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getAccountpwd() {
+        return accountpwd;
     }
 
-    public void setAccountName(String accountName) {
-        accountName = accountName;
+    public void setAccountpwd(String accountpwd) {
+        this.accountpwd = accountpwd;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
 
     public String getToken() {

@@ -72,7 +72,7 @@ public class DisplayController {
 
     @RequestMapping(value = "/login")
     @GenericResponseBody
-    public HyAccountDto login(LoginInCommand command) throws Exception{
+    public HyAccountDto login(@Valid LoginInCommand command) throws Exception{
         return loginService.login(command);
     }
 }
