@@ -9,13 +9,20 @@ import com.mapbar.display.exception.ErrorCode;
 public class TokenExpireException extends RuntimeException {
     private String code;
 
-    public TokenExpireException(){
+    private String tokenKey;
+
+    public TokenExpireException(String tokenKey){
         super();
         this.code = ErrorCode.TOKEN_EXPIRE;
+        this.tokenKey = tokenKey;
     }
 
     public String getCode() {
         return code;
+    }
+
+    public String getTokenKey() {
+        return tokenKey;
     }
 
 }

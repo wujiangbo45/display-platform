@@ -38,4 +38,13 @@ public class HyAccountDto implements Serializable {
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "HyAccountDto{" +
+                "accountName='" + accountName + '\'' +
+                ", accountNickName='" + accountNickName + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

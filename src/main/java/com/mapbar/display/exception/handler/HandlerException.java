@@ -137,7 +137,7 @@ public class HandlerException {
     public GenericResponse<?> handleTokenExpireException(HttpServletRequest request, TokenExpireException ex){
         logger.error("TokenExpireException exception", ex);
         String code = ex.getCode();
-        String msg = messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+        String msg = messageSource.getMessage(code, new Object[]{ex.getTokenKey()}, LocaleContextHolder.getLocale());
         return new GenericResponse<>(code,msg,null);
     }
 
@@ -146,7 +146,7 @@ public class HandlerException {
     public GenericResponse<?> handleTokenRequiredException(HttpServletRequest request, TokenRequiredException ex){
         logger.error("TokenRequiredException exception", ex);
         String code = ex.getCode();
-        String msg = messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+        String msg = messageSource.getMessage(code, new Object[]{ex.getTokenKey()}, LocaleContextHolder.getLocale());
         return new GenericResponse<>(code,msg,null);
     }
 
