@@ -57,8 +57,8 @@ public class HyAccountDto extends BaseDTOV1 implements Serializable {
     @Override
     public String toString() {
         return "HyAccountDto{" +
-                "accountName='" + accountName + '\'' +
-                ", accountNickName='" + accountNickName + '\'' +
+                "accountname='" + accountname + '\'' +
+                ", realname='" + realname + '\'' +
                 ", token='" + token + '\'' +
                 '}';
     }
