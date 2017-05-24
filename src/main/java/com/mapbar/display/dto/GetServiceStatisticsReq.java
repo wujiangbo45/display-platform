@@ -1,6 +1,6 @@
 package com.mapbar.display.dto;
 
-import com.mapbar.display.util.RegexpUtils;
+import com.mapbar.common.utils.RegexpUtils;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;

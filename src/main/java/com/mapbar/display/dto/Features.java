@@ -1,6 +1,6 @@
 package com.mapbar.display.dto;
 
-import com.mapbar.display.common.Const;
+import com.mapbar.common.Const;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,7 +2,7 @@ package com.mapbar.display.dto;
 
 import java.util.List;
 
-import static com.mapbar.display.common.Const.RESP_REALTIME_POSITION_TYPE;
+import static com.mapbar.common.Const.RESP_REALTIME_POSITION_TYPE;
 
 /**
  * @Author: wujiangbo

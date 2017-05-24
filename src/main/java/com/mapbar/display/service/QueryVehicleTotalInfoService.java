@@ -1,18 +1,13 @@
 package com.mapbar.display.service;
 
-import com.mapbar.display.aspect.LoggerAspect;
-import com.mapbar.display.common.CommonDao;
-import com.mapbar.display.dto.GetTotalMileageAndPackage;
-import com.mapbar.display.service.base.BaseService;
-import org.aspectj.lang.JoinPoint;
+import com.mapbar.common.aspect.LoggerAspect;
+import com.mapbar.common.base.CommonDao;
+import com.mapbar.common.base.BaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wangjc on 2017/5/22.

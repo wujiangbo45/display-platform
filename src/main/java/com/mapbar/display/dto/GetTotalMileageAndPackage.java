@@ -1,8 +1,5 @@
 package com.mapbar.display.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mapbar.display.util.JsonUtils;
-
 /**
  * Created by wangjc on 2017/5/22.
  * ��ȡ����������ݰ�����

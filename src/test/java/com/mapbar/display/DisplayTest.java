@@ -10,9 +10,5 @@ import org.junit.Test;
  */
 public class DisplayTest extends MockMvcSpringContextTests {
 
-    @Ignore
-    @Test
-    public void test() throws Exception {
-        assertSuccess();
-    }
+
 }

@@ -1,15 +1,15 @@
 package com.mapbar.display.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.mapbar.display.aspect.LoginRequired;
-import com.mapbar.display.command.LoginInReq;
-import com.mapbar.display.common.UrlProperties;
-import com.mapbar.display.common.bind.GenericResponseBody;
+import com.mapbar.common.aspect.LoginRequired;
+import com.mapbar.display.dto.LoginInReq;
+import com.mapbar.common.UrlProperties;
+import com.mapbar.common.web.bind.GenericResponseBody;
 import com.mapbar.display.dto.*;
 import com.mapbar.display.service.IDisplayService;
 import com.mapbar.display.service.LoginService;
 import com.mapbar.display.service.QueryVehicleTotalInfoService;
-import com.mapbar.display.util.http.HttpUtil;
+import com.mapbar.common.utils.http.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
