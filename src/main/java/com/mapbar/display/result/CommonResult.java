@@ -7,6 +7,7 @@ public class CommonResult {
 
     private int Code;
     private String Errmsg;
+    private String message;
 
     public CommonResult() {
     }
@@ -30,6 +31,10 @@ public class CommonResult {
 
     public void setErrmsg(String errmsg) {
         Errmsg = errmsg;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
     public <T extends CommonResult> T fillResult(InterfaceResultCode result) {
         this.setCode(result.code());
