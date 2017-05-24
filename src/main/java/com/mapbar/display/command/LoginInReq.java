@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by suixin on 2017/5/19.
  */
-public class LoginInCommand extends BaseCommand {
+public class LoginInReq {
 
     @NotNull(message = "用户名不能为空")
     @NotBlank(message = "用户名不能为空")
@@ -35,7 +35,7 @@ public class LoginInCommand extends BaseCommand {
 
     @Override
     public String toString() {
-        return "LoginInCommand{" +
+        return "LoginInReq{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

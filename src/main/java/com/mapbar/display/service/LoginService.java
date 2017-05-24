@@ -1,13 +1,11 @@
 package com.mapbar.display.service;
 
-import com.mapbar.display.command.LoginInCommand;
+import com.mapbar.display.command.LoginInReq;
 import com.mapbar.display.common.CommonDao;
 import com.mapbar.display.common.Const;
-import com.mapbar.display.dto.HyAccountDto;
+import com.mapbar.display.dto.HyAccountResp;
 import com.mapbar.display.exception.ErrorCode;
 import com.mapbar.display.exception.business.UserCheckException;
-import com.mapbar.display.result.CommonResult;
-import com.mapbar.display.result.ReturnCode;
 import com.mapbar.display.service.base.BaseService;
 import com.mapbar.display.util.JsonUtil;
 import com.mapbar.display.util.MD5Util;
@@ -18,8 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * Created by suixin on 2017/5/19.
@@ -44,10 +40,9 @@ public class LoginService extends BaseService {
      * @return
      */
     @Transactional
-    public HyAccountDto login(LoginInCommand command) throws Exception{
-        CommonResult result = new CommonResult();
+    public HyAccountResp login(LoginInReq command) throws Exception{
         // 查询用户信息
-        HyAccountDto hyAccountDto = (HyAccountDto)dao.sqlFindObject("queryLoginInfoSql", command, HyAccountDto.class);
+        HyAccountResp hyAccountDto = (HyAccountResp)dao.sqlFindObject("queryLoginInfoSql", command, HyAccountResp.class);
         if (null != hyAccountDto && command.getUsername().equals(hyAccountDto.getAccountname())) {
             accountPwd = hyAccountDto.getAccountpwd();
             // 密码md5加密校验

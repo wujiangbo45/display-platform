@@ -1,6 +1,6 @@
 package com.mapbar.display.service;
 
-import com.mapbar.display.command.ServerStationCommand;
+import com.mapbar.display.command.ServerStationReq;
 import com.mapbar.display.common.UrlProperties;
 import com.mapbar.display.dto.*;
 import com.mapbar.display.result.PolymerizeResult;
@@ -67,7 +67,7 @@ public class DisPlayServiceImpl extends BaseService implements IDisplayService{
             } else{// 一级服务站
                 sqlStr = "getFirstServiceStationInfo";
             }
-            ServerStationCommand command = new ServerStationCommand();
+            ServerStationReq command = new ServerStationReq();
             command.setId(serverStationId);
             ServerStationInfo info = (ServerStationInfo)dao.sqlFindObject(sqlStr,command,ServerStationInfo.class);
             ssRes.setDistrict(String.valueOf(dictNumberObj.getDistrict()));

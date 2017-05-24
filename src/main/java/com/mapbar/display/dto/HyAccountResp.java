@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by suixin on 2017/5/22.
  */
-public class HyAccountDto extends BaseDTOV1 implements Serializable {
+public class HyAccountResp {
     // 账号名
     @JsonIgnore
     private String accountname;
@@ -56,7 +56,7 @@ public class HyAccountDto extends BaseDTOV1 implements Serializable {
 
     @Override
     public String toString() {
-        return "HyAccountDto{" +
+        return "HyAccountResp{" +
                 "accountname='" + accountname + '\'' +
                 ", realname='" + realname + '\'' +
                 ", token='" + token + '\'' +

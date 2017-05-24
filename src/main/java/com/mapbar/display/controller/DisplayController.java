@@ -2,7 +2,7 @@ package com.mapbar.display.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapbar.display.aspect.LoginRequired;
-import com.mapbar.display.command.LoginInCommand;
+import com.mapbar.display.command.LoginInReq;
 import com.mapbar.display.common.UrlProperties;
 import com.mapbar.display.common.bind.GenericResponseBody;
 import com.mapbar.display.dto.*;
@@ -72,7 +72,7 @@ public class DisplayController {
 
     @RequestMapping(value = "/login")
     @GenericResponseBody
-    public HyAccountDto login(@Valid LoginInCommand command) throws Exception{
+    public HyAccountResp login(@Valid LoginInReq command) throws Exception{
         return loginService.login(command);
     }
 }
