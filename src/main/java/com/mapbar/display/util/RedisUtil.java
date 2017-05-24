@@ -68,4 +68,13 @@ public class RedisUtil
     public Long incr(String key,Long increment){
         return redisTemplate.opsForValue().increment(key,increment);
     }
+
+    public void delete(String key){
+        redisTemplate.delete(key);
+    }
+
+    public boolean hasKey(String key){
+        return redisTemplate.hasKey(key);
+    }
+
 }
