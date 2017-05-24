@@ -30,11 +30,19 @@ public class ErrorCode {
 
 	public static final String PARAM_ERR = "400";
 
-	/*JD库存不足*/
-	public static final String JD_STOCK_INSUFFICIENT = "301";
-	
-	/*Aserver异常码*/
 	/*token失效*/
 	public static final String ASER_TOKEN_INVALID = "22229";
-	
+
+	/**
+	 * 密码不正确
+	 */
+	public static final String ERROR_PASSWD = "311";
+
+	/**
+	 *
+	 */
+	public static final String USER_NOT_FOUND = "312";
+
+
+
 }

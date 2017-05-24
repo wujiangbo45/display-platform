@@ -6,13 +6,13 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="org.apache" level="INFO" />
     <logger name="org.apache.http.wire" level="DEBUG" />
-    <logger name="com.mapbar" level="debug"/>
-    <logger name="org.springframework" level="debug"/>
-    <logger name="org.apache.commons.digester" level="info" />
-    <logger name="org.apache.commons.beanutils" level="info" />
-    <root level="INFO">
+    <logger name="org.apache" level="INFO" />
+    <logger name="com.mapbar" level="DEBUG"/>
+    <logger name="org.apache.commons.digester" level="DEBUG" />
+    <logger name="org.apache.commons.beanutils" level="DEBUG" />
+    <logger name="org.apache.commons.httpclient" level="DEBUG" />
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 

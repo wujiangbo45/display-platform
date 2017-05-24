@@ -1,6 +1,7 @@
 package com.mapbar.display.exception.handler;
 
 import com.mapbar.display.exception.ErrorCode;
+import com.mapbar.display.exception.business.UserCheckException;
 import com.mapbar.display.exception.http.HttpRequestException;
 import com.mapbar.display.exception.http.LocalCloudException;
 import com.mapbar.display.common.bind.GenericResponse;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -118,6 +120,14 @@ public class HandlerException {
             resp = handleThrowable(request, ex);
         }
         return resp;
+    }
+    @ExceptionHandler(UserCheckException.class)
+    @ResponseBody
+    public GenericResponse<?> handleUserCheckException(HttpServletRequest request, UserCheckException ex){
+        logger.error("UserCheckException exception", ex);
+        String code = ex.getCode();
+        String msg = messageSource.getMessage(code, null, LocaleContextHolder.getLocale());
+        return new GenericResponse<>(code,msg,null);
     }
 
 }
