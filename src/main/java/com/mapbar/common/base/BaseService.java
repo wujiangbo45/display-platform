@@ -1,6 +1,7 @@
 package com.mapbar.common.base;
 
 
+import com.mapbar.common.utils.RedisUtil;
 import com.mapbar.common.utils.sqlLaber.SqlLaberUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,5 +26,8 @@ public class BaseService
 
     @Autowired
     public CommonDao dao;
+
+    @Autowired
+    public RedisUtil redisUtil;
 
 }

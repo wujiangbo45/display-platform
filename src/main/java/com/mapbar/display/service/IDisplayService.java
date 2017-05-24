@@ -1,9 +1,6 @@
 package com.mapbar.display.service;
 
-import com.mapbar.display.dto.GetServiceStatisticsReq;
-import com.mapbar.display.dto.GetServiceStatisticsResp;
-import com.mapbar.display.dto.VehicleRealtimePositionReq;
-import com.mapbar.display.dto.VehicleRealtimePositionResp;
+import com.mapbar.display.dto.*;
 
 import java.util.List;
 
@@ -17,4 +14,7 @@ public interface IDisplayService {
 
     public List<GetServiceStatisticsResp> getServiceStatistics(GetServiceStatisticsReq req) throws Exception;
 
+    public HyAccountResp login(LoginInReq command) throws Exception;
+
+    public int getTotalVehicle() throws Exception;
 }

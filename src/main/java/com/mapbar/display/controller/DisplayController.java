@@ -7,8 +7,6 @@ import com.mapbar.common.UrlProperties;
 import com.mapbar.common.web.bind.GenericResponseBody;
 import com.mapbar.display.dto.*;
 import com.mapbar.display.service.IDisplayService;
-import com.mapbar.display.service.LoginService;
-import com.mapbar.display.service.QueryVehicleTotalInfoService;
 import com.mapbar.common.utils.http.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +28,6 @@ public class DisplayController {
 
     @Autowired
     IDisplayService service;
-
-    @Autowired
-    QueryVehicleTotalInfoService qvtiService;
 
     @RequestMapping(value = "/queryVehicleRealtimePosition")
     @GenericResponseBody
@@ -62,17 +57,15 @@ public class DisplayController {
         totalInfo.setOnlineVehicle(String.valueOf(totalMil.getOnlineNum()));
         totalInfo.setRunningVehicle(String.valueOf(totalMil.getDriveNum()));
         totalInfo.setUploadDataCount(String.valueOf(totalMil.getPackageNum()));
-        totalInfo.setTotalVehicle(String.valueOf(qvtiService.getTotalVehicle()));
+        totalInfo.setTotalVehicle(String.valueOf(service.getTotalVehicle()));
 
         return totalInfo;
     }
 
-    @Autowired
-    private LoginService loginService;
 
     @RequestMapping(value = "/login")
     @GenericResponseBody
     public HyAccountResp login(@Valid LoginInReq command) throws Exception{
-        return loginService.login(command);
+        return service.login(command);
     }
 }
