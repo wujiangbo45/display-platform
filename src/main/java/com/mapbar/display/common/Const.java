@@ -20,5 +20,6 @@ public class Const {
     public static final Long TOKEN_LIVE_TIME_MINUTE = 30L;
     public static final String TOKEN_KEY_PREFX = "stoken_";
     public static final String USER_KEY_PREFX = "user_";
+    public static final String SUCCESS_MESSAGE = "请求成功";
 
 }

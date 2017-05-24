@@ -1,5 +1,7 @@
 package com.mapbar.display.common.bind;
 
+import com.mapbar.display.common.Const;
+
 /**
  * @Author: wujiangbo
  * @Create: 2017/05/18 14:26
@@ -17,7 +19,7 @@ public class GenericResponse<T> {
     }
 
     public GenericResponse(T result) {
-        this("200", null, result);
+        this("200", Const.SUCCESS_MESSAGE, result);
     }
 
     public GenericResponse(String resultCode, String message, T data) {
