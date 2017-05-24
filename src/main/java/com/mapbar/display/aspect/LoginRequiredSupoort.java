@@ -66,7 +66,7 @@ public class LoginRequiredSupoort {
         if (StringUtil.isEmpty(token)){
             logger.error("====  FAILURE : token验证失败:无token参数");
             logger.info("=======================token验证结束==========================");
-            throw new TokenRequiredException();
+            throw new TokenRequiredException(tokenKey);
         }
 
         // 获取登录信息
@@ -82,7 +82,7 @@ public class LoginRequiredSupoort {
             // token expire
             logger.error("====  FAILURE : token验证失败:token失效");
             logger.info("=======================token验证结束==========================");
-            throw new TokenExpireException();
+            throw new TokenExpireException(tokenKey);
         }
         return obj;
     }

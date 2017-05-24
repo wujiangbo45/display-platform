@@ -9,12 +9,20 @@ import com.mapbar.display.exception.ErrorCode;
 public class TokenRequiredException extends RuntimeException {
     private String code;
 
-    public TokenRequiredException(){
+    private String tokenKey;
+
+    public TokenRequiredException(String tokenKey){
         super();
         this.code = ErrorCode.TOKEN_REQUIRED;
+        this.tokenKey = tokenKey;
     }
 
     public String getCode() {
         return code;
     }
+
+    public String getTokenKey() {
+        return tokenKey;
+    }
+
 }

@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/display", method =
-        { RequestMethod.GET}, produces =
+        { RequestMethod.GET,RequestMethod.POST }, produces =
         { "application/json;charset=UTF-8" })
 public class DisplayController {
 

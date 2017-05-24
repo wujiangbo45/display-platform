@@ -53,4 +53,13 @@ public class HyAccountDto extends BaseDTOV1 implements Serializable {
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "HyAccountDto{" +
+                "accountName='" + accountName + '\'' +
+                ", accountNickName='" + accountNickName + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }
