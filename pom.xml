@@ -245,7 +245,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>com.mapbar.common.Application</mainClass>
+                    <mainClass>com.mapbar.platform.common.Application</mainClass>
                     <layout>JAR</layout>
                     <classifier>boot</classifier>
                 </configuration>
