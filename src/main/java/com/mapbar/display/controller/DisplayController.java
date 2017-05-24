@@ -45,12 +45,14 @@ public class DisplayController {
 
     @RequestMapping(value = "/queryServiceStatistics")
     @GenericResponseBody
+    @LoginRequired
     public List<GetServiceStatisticsResp> queryServiceStatistics(@Valid GetServiceStatisticsReq req) throws Exception {
         return service.getServiceStatistics(req);
     }
 
     @RequestMapping(value = "/queryVehicleTotalInfo")
     @GenericResponseBody
+    @LoginRequired
     public QueryVehicleTotalInfo totalInfo() throws Exception {
         String url = UrlProperties.getUrl("localcloud.getTotalMileageAndPackage");
         GetTotalMileageAndPackage totalMil = HttpUtil.getLocalCloudJsonRequest(url, new TypeReference<LocalCloudRespopnse<GetTotalMileageAndPackage>>() {

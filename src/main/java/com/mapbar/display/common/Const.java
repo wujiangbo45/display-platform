@@ -17,4 +17,8 @@ public class Const {
 
     public static final String RESP_FEATURE_TYPE = "Feature";
 
+    public static final Long TOKEN_LIVE_TIME_MINUTE = 30L;
+    public static final String TOKEN_KEY_PREFX = "stoken_";
+    public static final String USER_KEY_PREFX = "user_";
+
 }

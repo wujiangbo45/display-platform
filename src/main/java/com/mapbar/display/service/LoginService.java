@@ -2,6 +2,7 @@ package com.mapbar.display.service;
 
 import com.mapbar.display.command.LoginInCommand;
 import com.mapbar.display.common.CommonDao;
+import com.mapbar.display.common.Const;
 import com.mapbar.display.dto.HyAccountDto;
 import com.mapbar.display.exception.ErrorCode;
 import com.mapbar.display.exception.business.UserCheckException;
@@ -61,17 +62,17 @@ public class LoginService {
                 String json = JsonUtil.toJson(hyAccountDto);
 
                 // redis对应的key
-                String uKey = "user_" + command.getUsername();
-                String tKey = "stoken_" + token;
+                String uKey = Const.USER_KEY_PREFX + command.getUsername();
+                String tKey = Const.TOKEN_KEY_PREFX + token;
                 // 删除redis记录
                 if(redisUtil.hasKey(uKey)){
                     String oldToken = redisUtil.get(uKey);
                     redisUtil.delete(uKey);
-                    redisUtil.delete("stoken_" + oldToken);
+                    redisUtil.delete(Const.TOKEN_KEY_PREFX + oldToken);
                 }
                 // 存入redis
-                redisUtil.set(uKey, token, 30L);//用户对应的token
-                redisUtil.set(tKey, json,30L);//token对应的用户信息
+                redisUtil.set(uKey, token, Const.TOKEN_LIVE_TIME_MINUTE);//用户对应的token
+                redisUtil.set(tKey, json,Const.TOKEN_LIVE_TIME_MINUTE);//token对应的用户信息
 
             } else {
                 throw new UserCheckException(ErrorCode.ERROR_PASSWD);

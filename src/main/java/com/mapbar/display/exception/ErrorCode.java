@@ -39,9 +39,12 @@ public class ErrorCode {
 	public static final String ERROR_PASSWD = "311";
 
 	/**
-	 *
+	 *	用户不存在
 	 */
 	public static final String USER_NOT_FOUND = "312";
+
+	/*需要token*/
+	public static final String TOKEN_REQUIRED = "98";
 
 
 
