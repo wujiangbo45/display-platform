@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE  dynamic-hibernate-statement [
+        <!ELEMENT dynamic-hibernate-statement (
+                (hql-query|sql-query)*
+                )>
+        <!-- default: none -->
+
+        <!-- The query element declares a named Hibernate query string -->
+
+        <!ELEMENT hql-query (#PCDATA)>
+        <!ATTLIST hql-query name CDATA #REQUIRED>
+
+        <!-- The sql-query element declares a named SQL query string -->
+
+        <!ELEMENT sql-query (#PCDATA)>
+        <!ATTLIST sql-query name CDATA #REQUIRED>
+        ]>
+
+
+<dynamic-hibernate-statement>
+    <sql-query name="queryLoginInfoSql">
+        <![CDATA[
+          SELECT
+            ha.ACCOUNT_NAME AS accountName,
+            ha.ACCOUNT_NICKNAME AS accountNickName
+          FROM
+            hy_account ha
+          WHERE
+            ha.ACCOUNT_NAME = '${accountName}'
+        ]]>
+    </sql-query>
+
+
+</dynamic-hibernate-statement>
