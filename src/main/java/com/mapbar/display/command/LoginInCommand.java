@@ -11,25 +11,33 @@ public class LoginInCommand extends BaseCommand {
 
     @NotNull(message = "用户名不能为空")
     @NotBlank(message = "用户名不能为空")
-    private String accountName;	//	登录者名称
+    private String username;	//	登录者名称
 
     @NotNull(message = "密码不能为空")
     @NotBlank(message = "密码不能为空")
-    private String accountPwd;	//	密码
+    private String password;	//	密码
 
-    public String getAccountName() {
-        return accountName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getAccountPwd() {
-        return accountPwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAccountPwd(String accountPwd) {
-        this.accountPwd = accountPwd;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginInCommand{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

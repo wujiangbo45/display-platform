@@ -13,18 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by suixin on 2017/5/19.
  */
 
-@Controller
-@RequestMapping(value = "/display", method =
-        { RequestMethod.GET,RequestMethod.POST }, produces =
-        { "application/json;charset=UTF-8" })
 public class LoginController {
 
-    @Autowired
-    private LoginService loginService;
 
-    @RequestMapping(value = "/login")
-    @GenericResponseBody
-    public HyAccountDto login(LoginInCommand command) {
-        return loginService.login(command);
-    }
 }

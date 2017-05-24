@@ -27,7 +27,7 @@
           FROM
             hy_account ha
           WHERE
-            ha.ACCOUNT_NAME = '${accountName}'
+            ha.ACCOUNT_NAME = '${username}'
         ]]>
     </sql-query>
 

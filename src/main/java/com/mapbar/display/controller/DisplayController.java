@@ -1,14 +1,17 @@
 package com.mapbar.display.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.mapbar.display.command.LoginInCommand;
 import com.mapbar.display.common.UrlProperties;
 import com.mapbar.display.common.bind.GenericResponseBody;
 import com.mapbar.display.dto.*;
 import com.mapbar.display.service.IDisplayService;
+import com.mapbar.display.service.LoginService;
 import com.mapbar.display.service.QueryVehicleTotalInfoService;
 import com.mapbar.display.util.http.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -60,4 +63,12 @@ public class DisplayController {
         return totalInfo;
     }
 
+    @Autowired
+    private LoginService loginService;
+
+    @RequestMapping(value = "/login")
+    @GenericResponseBody
+    public HyAccountDto login(LoginInCommand command) throws Exception{
+        return loginService.login(command);
+    }
 }
