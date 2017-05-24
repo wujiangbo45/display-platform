@@ -34,7 +34,7 @@ public class LoginService {
     String accountPwd = null;
 
     /**
-     * µÇÂ½
+     * ç™»é™†
      *
      * @param command
      * @return
@@ -45,42 +45,42 @@ public class LoginService {
         HyAccountDto hyAccountDto = new HyAccountDto();
         logger.info("login--------start--------");
         try {
-            // ²éÑ¯ÓÃ»§ĞÅÏ¢
+            // æŸ¥è¯¢ç”¨æˆ·ä¿¡æ¯
             List<HyAccountDto> dtoList = dao.sqlFind("queryLoginInfoSql", command, HyAccountDto.class);
             if (null != dtoList && !dtoList.isEmpty() && command.getAccountName().equals(dtoList.get(0).getAccountName())) {
-                // ÓÃ»§ĞÅÏ¢
+                // ç”¨æˆ·ä¿¡æ¯
                 hyAccountDto = dtoList.get(0);
 
-                // ÃÜÂëmd5¼ÓÃÜĞ£Ñé
+                // å¯†ç md5åŠ å¯†æ ¡éªŒ
                 MD5Util md5Util = new MD5Util();
                 if (md5Util.checkPasswordAndUserPwd(command.getAccountPwd(), accountPwd)) {
-                    // Éú³Étoken
+                    // ç”Ÿæˆtoken
                     String token = StringUtil.getUUID();
                     hyAccountDto.setToken(token);
 
-                    // json¸ñÊ½×ª»»
+                    // jsonæ ¼å¼è½¬æ¢
                     String json = JsonUtil.toJson(hyAccountDto);
 
-                    // redis¶ÔÓ¦µÄkey
+                    // rediså¯¹åº”çš„key
                     String uKey = "user_" + command.getAccountName();
                     String tKey = "stoken_" + token;
-                    // É¾³ıredis¼ÇÂ¼
+                    // åˆ é™¤redisè®°å½•
                     if(redisTemplate.hasKey(uKey)){
                         String oldToken = redisTemplate.boundValueOps(uKey).get();
                         redisTemplate.delete(uKey);
                         redisTemplate.delete("stoken_" + oldToken);
                     }
-                    // ´æÈëredis
-                    redisTemplate.opsForValue().set(uKey, token);//ÓÃ»§¶ÔÓ¦µÄtoken
-                    redisTemplate.opsForValue().set(tKey, json);//token¶ÔÓ¦µÄÓÃ»§ĞÅÏ¢
+                    // å­˜å…¥redis
+                    redisTemplate.opsForValue().set(uKey, token);//ç”¨æˆ·å¯¹åº”çš„token
+                    redisTemplate.opsForValue().set(tKey, json);//tokenå¯¹åº”çš„ç”¨æˆ·ä¿¡æ¯
 
                 } else {
                     result.fillResult(ReturnCode.CLIENT_ERROR);
-                    result.setErrmsg("ÃÜÂë²»ÕıÈ·");
+                    result.setErrmsg("å¯†ç ä¸æ­£ç¡®");
                 }
             } else {
                 result.fillResult(ReturnCode.CLIENT_ERROR);
-                result.setMessage("´ËÓÃ»§²»´æÔÚ");
+                result.setMessage("æ­¤ç”¨æˆ·ä¸å­˜åœ¨");
             }
         } catch (Exception e) {
             result.fillResult(ReturnCode.SERVER_ERROR);

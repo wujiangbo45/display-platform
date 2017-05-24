@@ -9,13 +9,13 @@ import javax.validation.constraints.NotNull;
  */
 public class LoginInCommand extends BaseCommand {
 
-    @NotNull(message = "ÓÃ»§Ãû²»ÄÜÎª¿Õ")
-    @NotBlank(message = "ÓÃ»§Ãû²»ÄÜÎª¿Õ")
-    private String accountName;	//	µÇÂ¼ÕßÃû³Æ
+    @NotNull(message = "ç”¨æˆ·åä¸èƒ½ä¸ºç©º")
+    @NotBlank(message = "ç”¨æˆ·åä¸èƒ½ä¸ºç©º")
+    private String accountName;	//	ç™»å½•è€…åç§°
 
-    @NotNull(message = "ÃÜÂë²»ÄÜÎª¿Õ")
-    @NotBlank(message = "ÃÜÂë²»ÄÜÎª¿Õ")
-    private String accountPwd;	//	ÃÜÂë
+    @NotNull(message = "å¯†ç ä¸èƒ½ä¸ºç©º")
+    @NotBlank(message = "å¯†ç ä¸èƒ½ä¸ºç©º")
+    private String accountPwd;	//	å¯†ç 
 
     public String getAccountName() {
         return accountName;

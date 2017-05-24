@@ -6,13 +6,13 @@ import java.io.Serializable;
  * Created by suixin on 2017/5/22.
  */
 public class HyAccountDto implements Serializable {
-    // ÕËºÅÃû
+    // è´¦å·å
     private String accountName;
 
-    // êÇ³Æ
+    // æ˜µç§°
     private String accountNickName;
 
-    // ÓÃ»§±ê¼Ç
+    // ç”¨æˆ·æ ‡è®°
     private String token;
 
     public String getAccountNickName() {
