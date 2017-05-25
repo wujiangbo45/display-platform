@@ -172,6 +172,9 @@
     <profiles>
         <profile>
             <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <spring.profiles.active>local</spring.profiles.active>
                 <build.profile.id>local</build.profile.id>
