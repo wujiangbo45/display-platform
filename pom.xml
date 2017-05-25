@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>mapbar</groupId>
-    <artifactId>display-parent</artifactId>
+    <artifactId>display-platform</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>display-common</module>
