@@ -40,6 +40,9 @@ public class AccessLoggerFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+		httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
+		httpServletResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 		String actionMethod = httpRequest.getParameter(actionParamName);
 		String uri = httpRequest.getRequestURI();
 		String httpMethod = httpRequest.getMethod();
