@@ -74,6 +74,8 @@ public class LoginRequiredSupoort {
         if(redisUtil.hasKey(stoken) && StringUtil.isNotEmpty(redisUtil.get(stoken))){
             logger.info("====  SUCCESS : token验证成功");
             logger.info("=======================token验证结束==========================");
+            // 刷新token,30分钟
+            redisUtil.expire(stoken,Const.TOKEN_LIVE_TIME_MINUTE);
             obj = joinPoint.proceed();
         }else {
             // token expire
