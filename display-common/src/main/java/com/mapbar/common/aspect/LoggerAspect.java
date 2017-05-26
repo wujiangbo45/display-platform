@@ -24,13 +24,13 @@ public class LoggerAspect {
 
     ThreadLocal<Long> startTime = new ThreadLocal<Long>();
 
-    @Pointcut("execution(* com..*.*Controller(..))")
+    @Pointcut("execution(* com.mapbar.*.controller.*.*(..))")
     @Order(0)
     public void controllerLogger(){
 
     }
 
-    @Pointcut("execution(* com..*.*Service(..))")
+    @Pointcut("execution(* com.mapbar.*.service.*.*(..))")
     @Order(2)
     public void serviceLogger(){
 
