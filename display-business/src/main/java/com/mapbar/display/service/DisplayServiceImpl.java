@@ -101,9 +101,10 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
     public HyAccountResp login(LoginInReq command) throws Exception{
         // 查询用户信息
         String accountPwd = "";
-        HyAccountResp hyAccountDto = (HyAccountResp)dao.sqlFindObject("queryLoginInfoSql", command, HyAccountResp.class);
+        HyAccountDto hyAccountDto = (HyAccountDto)dao.sqlFindObject("queryLoginInfoSql", command, HyAccountDto.class);
         if (null != hyAccountDto && command.getUsername().equals(hyAccountDto.getAccountname())) {
             accountPwd = hyAccountDto.getAccountpwd();
+
             // 密码md5加密校验
             MD5Util md5Util = new MD5Util();
             if (md5Util.checkPasswordAndUserPwd(command.getPassword(), accountPwd)) {
@@ -132,7 +133,11 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
         } else {
             throw new UserCheckException(ErrorCode.USER_NOT_FOUND);
         }
-        return hyAccountDto;
+
+        HyAccountResp hyAccountResp = new HyAccountResp();
+        hyAccountResp.setRealname(hyAccountDto.getRealname());
+        hyAccountResp.setToken(hyAccountDto.getToken());
+        return hyAccountResp;
     }
 
     @Override
