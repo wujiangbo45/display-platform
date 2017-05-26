@@ -5,8 +5,10 @@ import com.mapbar.common.Const;
 import com.mapbar.common.UrlProperties;
 import com.mapbar.common.base.BaseService;
 import com.mapbar.common.exception.ErrorCode;
+import com.mapbar.common.exception.business.TokenExpireException;
 import com.mapbar.common.exception.business.UserCheckException;
 import com.mapbar.common.utils.JsonUtil;
+import com.mapbar.common.utils.JsonUtils;
 import com.mapbar.common.utils.MD5Util;
 import com.mapbar.common.utils.StringUtil;
 import com.mapbar.common.utils.http.HttpUtil;
@@ -79,7 +81,7 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
             ssRes.setDistrict(String.valueOf(dictNumberObj.getDistrict()));
             ssRes.setNumber(String.valueOf(dictNumberObj.getNumber()));
             if (null != info){
-                ssRes.setDistrictName(info.getStaName());
+                ssRes.setDistrictName(info.getStaname());
             }
             resp.add(ssRes);
         }
@@ -151,4 +153,22 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
         return intTotal;
     }
 
+    @Override
+    public void logOut(LogoutReq req) throws Exception {
+        // cha
+        String token = req.getToken(); // stoken_xxx
+        String cacheTokenKey = Const.TOKEN_KEY_PREFX + token;
+        // 查询是否有此token
+        if (!redisUtil.hasKey(cacheTokenKey)){
+            // 无此token
+            throw new TokenExpireException("token:" + token);
+        }
+        // 获取token信息
+        HyAccountDto res = JsonUtils.fromJson(redisUtil.get(cacheTokenKey),HyAccountDto.class);
+        // 获取用户名并且清空缓存 user_xxx
+        String uKey = Const.USER_KEY_PREFX + res.getAccountname();
+        // 清空缓存
+        redisUtil.delete(cacheTokenKey, uKey);
+
+    }
 }

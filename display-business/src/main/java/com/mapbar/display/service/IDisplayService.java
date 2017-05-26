@@ -17,4 +17,6 @@ public interface IDisplayService {
     public HyAccountResp login(LoginInReq command) throws Exception;
 
     public int getTotalVehicle() throws Exception;
+
+    public void logOut(LogoutReq req) throws Exception;
 }

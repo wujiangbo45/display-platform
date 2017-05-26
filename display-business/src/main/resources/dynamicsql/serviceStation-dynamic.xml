@@ -21,13 +21,13 @@
 <dynamic-hibernate-statement>
     <sql-query name="getFirstServiceStationInfo">
         <![CDATA[
-             SELECT ID,STATION_NAME staName from hy_service_station where id = ${id}
+             SELECT STATION_NAME staname from hy_service_station where id = ${id}
         ]]>
     </sql-query>
 
     <sql-query name="getSecondServiceStationInfo">
         <![CDATA[
-        SELECT ID,name staName from hy_secdstation where id = ${id}
+        SELECT name staname from hy_secdstation where id = ${id}
 
         ]]>
     </sql-query>

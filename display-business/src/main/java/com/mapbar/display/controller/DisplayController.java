@@ -68,4 +68,10 @@ public class DisplayController {
     public HyAccountResp login(@Valid LoginInReq command) throws Exception{
         return service.login(command);
     }
+
+    @RequestMapping(value = "/logout")
+    @GenericResponseBody
+    public void login(@Valid LogoutReq req) throws Exception{
+        service.logOut(req);
+    }
 }

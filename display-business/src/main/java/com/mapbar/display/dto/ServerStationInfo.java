@@ -6,31 +6,23 @@ package com.mapbar.display.dto;
  */
 public class ServerStationInfo {
 
-    private String id;
 
-    private String staName;
+    private String staname;
 
-    public String getId() {
-        return id;
+
+    public String getStaname() {
+        return staname;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setStaname(String staname) {
+        this.staname = staname;
     }
 
-    public String getStaName() {
-        return staName;
-    }
-
-    public void setStaName(String staName) {
-        this.staName = staName;
-    }
 
     @Override
     public String toString() {
         return "ServerStationInfo{" +
-                "id='" + id + '\'' +
-                ", staName='" + staName + '\'' +
+                ", staname='" + staname + '\'' +
                 '}';
     }
 }
