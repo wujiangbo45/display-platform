@@ -21,17 +21,11 @@ public class AccessLoggerFilter implements Filter {
 	
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private static final String ACTION_PARAM_NAME = "token";
 
 
-	private String actionParamName = ACTION_PARAM_NAME;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		String actionName = filterConfig.getInitParameter("token");
-		if (actionName != null) {
-			actionParamName = actionName;
-		}
 	}
 
 	@Override
@@ -42,12 +36,11 @@ public class AccessLoggerFilter implements Filter {
 		httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 		httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 		httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
-		httpServletResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-		String actionMethod = httpRequest.getParameter(actionParamName);
+		httpServletResponse.setHeader("Access-Control-Allow-Headers", "*");
 		String uri = httpRequest.getRequestURI();
 		String httpMethod = httpRequest.getMethod();
 		String addr = httpRequest.getRemoteAddr();
-		logger.info("{} {} with [token: {}] from {}", httpMethod, uri, actionMethod, addr);
+		logger.info("{} {}  from {}", httpMethod, uri, addr);
 		
 		chain.doFilter(request, response);
 	}
