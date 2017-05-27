@@ -409,8 +409,8 @@ public class PolymerizeService {
     public List<PolymerizeDto> filterScreenCarToDto(List<LocationDataResp> polymerizeDtoList, VehicleRealtimePositionReq inDto) {
         List<PolymerizeDto> resultList = new ArrayList<PolymerizeDto>();
         for (LocationDataResp obj : polymerizeDtoList) {
-            if (obj.getLng() > inDto.getRightLongitude() || obj.getLng() < inDto.getLeftLongitude() ||
-                    obj.getLat() > inDto.getRightLatitude() || obj.getLat() < inDto.getLeftLatitude()){
+            if (obj.getLng() > Double.parseDouble(inDto.getRightLongitude()) || obj.getLng() < Double.parseDouble(inDto.getLeftLongitude()) ||
+                    obj.getLat() > Double.parseDouble(inDto.getRightLatitude()) || obj.getLat() < Double.parseDouble(inDto.getLeftLatitude())){
                 continue;
             }else{
                 PolymerizeDto result = new PolymerizeDto();

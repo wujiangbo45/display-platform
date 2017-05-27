@@ -23,7 +23,7 @@ public class VehicleRealtimePositionReq {
     @NotNull(message = "右经度（东北角）不能为空")
     @NotBlank(message = "右经度（东北角）不能为空")
     @Pattern(regexp = RegexpUtils.LON_REGEXP, message = "请填写正确的经度信息")
-    private Double rightLongitude;
+    private String rightLongitude;
 
     /**
      * 右纬度（东北角）
@@ -31,7 +31,7 @@ public class VehicleRealtimePositionReq {
     @NotNull(message = "右纬度（东北角）不能为空")
     @NotBlank(message = "右纬度（东北角）不能为空")
     @Pattern(regexp = RegexpUtils.LAT_REGEXP, message = "请填写正确的纬度信息")
-    private Double rightLatitude;
+    private String rightLatitude;
 
     /**
      * 左经度（西南角）
@@ -39,7 +39,7 @@ public class VehicleRealtimePositionReq {
     @NotNull(message = "左经度（西南角）不能为空")
     @NotBlank(message = "左经度（西南角）不能为空")
     @Pattern(regexp = RegexpUtils.LON_REGEXP, message = "请填写正确的经度信息")
-    private Double leftLongitude;
+    private String leftLongitude;
 
     /**
      * 左纬度（西南角）
@@ -47,37 +47,37 @@ public class VehicleRealtimePositionReq {
     @NotNull(message = "左纬度（西南角）不能为空")
     @NotBlank(message = "左纬度（西南角）不能为空")
     @Pattern(regexp = RegexpUtils.LAT_REGEXP, message = "请填写正确的纬度信息")
-    private Double leftLatitude;
+    private String leftLatitude;
 
-    public Double getRightLongitude() {
+    public String getRightLongitude() {
         return rightLongitude;
     }
 
-    public void setRightLongitude(Double rightLongitude) {
+    public void setRightLongitude(String rightLongitude) {
         this.rightLongitude = rightLongitude;
     }
 
-    public Double getLeftLongitude() {
-        return leftLongitude;
-    }
-
-    public void setLeftLongitude(Double leftLongitude) {
-        this.leftLongitude = leftLongitude;
-    }
-
-    public Double getRightLatitude() {
+    public String getRightLatitude() {
         return rightLatitude;
     }
 
-    public void setRightLatitude(Double rightLatitude) {
+    public void setRightLatitude(String rightLatitude) {
         this.rightLatitude = rightLatitude;
     }
 
-    public Double getLeftLatitude() {
+    public String getLeftLongitude() {
+        return leftLongitude;
+    }
+
+    public void setLeftLongitude(String leftLongitude) {
+        this.leftLongitude = leftLongitude;
+    }
+
+    public String getLeftLatitude() {
         return leftLatitude;
     }
 
-    public void setLeftLatitude(Double leftLatitude) {
+    public void setLeftLatitude(String leftLatitude) {
         this.leftLatitude = leftLatitude;
     }
 
