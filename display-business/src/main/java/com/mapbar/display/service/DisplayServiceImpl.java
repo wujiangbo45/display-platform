@@ -7,14 +7,13 @@ import com.mapbar.common.base.BaseService;
 import com.mapbar.common.exception.ErrorCode;
 import com.mapbar.common.exception.business.TokenExpireException;
 import com.mapbar.common.exception.business.UserCheckException;
-import com.mapbar.common.utils.JsonUtil;
-import com.mapbar.common.utils.JsonUtils;
-import com.mapbar.common.utils.MD5Util;
-import com.mapbar.common.utils.StringUtil;
+import com.mapbar.common.utils.*;
 import com.mapbar.common.utils.http.HttpUtil;
 import com.mapbar.common.utils.http.LocalCloudRespopnse;
 import com.mapbar.display.dto.*;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.mapbar.display.polymerize.CoordinateInfoUtil;
 import com.mapbar.display.polymerize.PolymerizeResp;
@@ -31,27 +30,43 @@ import java.util.List;
 public class DisplayServiceImpl extends BaseService implements IDisplayService{
 
 
+
     @Autowired
     PolymerizeService polymerizeService;
 
     @Override
     public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception{
         String numBit = req.getNumBits();
-        // 请求位置云
-        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("localcloud.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
-        int size = resp.size();
-        List<PolymerizeDto> dtoList = new ArrayList<>(size);
-        for (LocationDataResp data : resp){
-            PolymerizeDto dto = new PolymerizeDto();
-            dto.setLat(data.getLat());
-            dto.setLon(data.getLng());
-            dto.setPropertyInfo("1");
-            dtoList.add(dto);
-        }
+        // 从缓存获取数据
+        List<LocationDataResp> resp = JsonUtils.fromJson(redisUtil.get(Const.LOCATION_DATA_KEY), new TypeReference<List<LocationDataResp>>() {
+        });
+        // 过滤数据
+        List<PolymerizeDto> dtoList = polymerizeService.filterScreenCarToDto(resp, req);
+//        int numBits = polymerizeService.setPrecision(req.getRightLatitude(),req.getRightLongitude(),req.getLeftLatitude(),req.getLeftLongitude());
         // 进行聚合
         List<PolymerizeResp> result = polymerizeService.getPolymerizeResult(dtoList,Integer.parseInt(numBit));
+
         return CoordinateInfoUtil.castPolymerizeToResp(result);
     }
+
+
+//    public VehicleRealtimePositionResp test(VehicleRealtimePositionReq req) throws Exception{
+//        String numBit = req.getNumBits();
+//        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("localcloud.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
+//        int size = resp.size();
+//        List<PolymerizeDto> dtoList = new ArrayList<>(size);
+//        for (LocationDataResp data : resp){
+//            PolymerizeDto dto = new PolymerizeDto();
+//            dto.setLat(data.getLat());
+//            dto.setLon(data.getLng());
+//            dto.setPropertyInfo("1");
+//            dtoList.add(dto);
+//        }
+//        // 进行聚合
+//        List<PolymerizeResp> result = polymerizeService.getPolymerizeResult(dtoList,Integer.parseInt(numBit));
+//        return CoordinateInfoUtil.castPolymerizeToResp(result);
+//    }
+
 
     @Override
     public List<GetServiceStatisticsResp> getServiceStatistics(GetServiceStatisticsReq req) throws Exception{

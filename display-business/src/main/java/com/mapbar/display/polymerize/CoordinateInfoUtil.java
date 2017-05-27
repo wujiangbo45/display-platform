@@ -16,15 +16,13 @@ public class CoordinateInfoUtil {
 
         VehicleRealtimePositionResp resp = new VehicleRealtimePositionResp();
         List<Features> f = new ArrayList<>();
-        for(int i = 0;i < coorList.size();i ++){
+        for (PolymerizeResp pMr : coorList) {
             Features d = new Features();
             Geometry g = new Geometry();
-            g.setCoordinates(coorList.get(i).getLat(), coorList.get(i).getLon());
+            g.setCoordinates(pMr.getLat(), pMr.getLon());
             d.setGeometry(g);
-            if(coorList.get(i).getCarCount() != 0 && coorList.get(i).getCarCount() != null){
-                d.setProperties(coorList.get(i).getCarCount().toString());
-            }else{
-                d.setProperties("0");
+            if(pMr.getCarCount() > 1 ){
+                d.setProperties(String.valueOf(pMr.getCarCount()));
             }
             f.add(d);
         }

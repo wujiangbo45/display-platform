@@ -12,6 +12,7 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 /**
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @EnableAutoConfiguration
 @ComponentScan("com.mapbar.*")
+@EnableScheduling
 public class Application implements CommandLineRunner {
 
 	@Autowired

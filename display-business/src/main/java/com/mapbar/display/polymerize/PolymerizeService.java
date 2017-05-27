@@ -1,6 +1,8 @@
 package com.mapbar.display.polymerize;
 
+import com.mapbar.display.dto.LocationDataResp;
 import com.mapbar.display.dto.PolymerizeDto;
+import com.mapbar.display.dto.VehicleRealtimePositionReq;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,6 +28,7 @@ public class PolymerizeService {
     private final Double[] kmLevel = {626.172135,150.348414,82.119366,19.567879,4.707179,2.564679,0.611496,0.147084,0.080188,0.019109,0.004596};
 
     private final double EARTH_RADIUS = 6378.137;
+
 
     public List<PolymerizeResp> getPolymerizeResult(List<PolymerizeDto> latLon, Integer numBits) {
         Set<String> setGeoHash = new HashSet<>();
@@ -397,4 +400,28 @@ public class PolymerizeService {
 //        }
 //
     }
+    /**
+     * 过滤出现在屏幕中的车辆坐标
+     * @param polymerizeDtoList
+     * @param inDto
+     * @return
+     */
+    public List<PolymerizeDto> filterScreenCarToDto(List<LocationDataResp> polymerizeDtoList, VehicleRealtimePositionReq inDto) {
+        List<PolymerizeDto> resultList = new ArrayList<PolymerizeDto>();
+        for (LocationDataResp obj : polymerizeDtoList) {
+            if (obj.getLng() > inDto.getRightLongitude() || obj.getLng() < inDto.getLeftLongitude() ||
+                    obj.getLat() > inDto.getRightLatitude() || obj.getLat() < inDto.getLeftLatitude()){
+                continue;
+            }else{
+                PolymerizeDto result = new PolymerizeDto();
+                result.setLon(obj.getLng());
+                result.setLat(obj.getLat());
+                result.setPropertyInfo("1");
+                resultList.add(result);
+            }
+        }
+
+        return resultList;
+    }
+
 }
