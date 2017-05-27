@@ -1,5 +1,6 @@
 package com.mapbar.display.dto;
 
+import com.mapbar.common.utils.RegexpUtils;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
@@ -19,21 +20,33 @@ public class VehicleRealtimePositionReq {
     /**
      * 右经度（东北角）
      */
+    @NotNull(message = "右经度（东北角）不能为空")
+    @NotBlank(message = "右经度（东北角）不能为空")
+    @Pattern(regexp = RegexpUtils.LON_REGEXP, message = "请填写正确的经度信息")
     private Double rightLongitude;
 
     /**
      * 右纬度（东北角）
      */
+    @NotNull(message = "右纬度（东北角）不能为空")
+    @NotBlank(message = "右纬度（东北角）不能为空")
+    @Pattern(regexp = RegexpUtils.LAT_REGEXP, message = "请填写正确的纬度信息")
     private Double rightLatitude;
 
     /**
      * 左经度（西南角）
      */
+    @NotNull(message = "左经度（西南角）不能为空")
+    @NotBlank(message = "左经度（西南角）不能为空")
+    @Pattern(regexp = RegexpUtils.LON_REGEXP, message = "请填写正确的经度信息")
     private Double leftLongitude;
 
     /**
      * 左纬度（西南角）
      */
+    @NotNull(message = "左纬度（西南角）不能为空")
+    @NotBlank(message = "左纬度（西南角）不能为空")
+    @Pattern(regexp = RegexpUtils.LAT_REGEXP, message = "请填写正确的纬度信息")
     private Double leftLatitude;
 
     public Double getRightLongitude() {
