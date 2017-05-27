@@ -19,7 +19,7 @@ public class CoordinateInfoUtil {
         for (PolymerizeResp pMr : coorList) {
             Features d = new Features();
             Geometry g = new Geometry();
-            g.setCoordinates(pMr.getLat(), pMr.getLon());
+            g.setCoordinates(pMr.getLon(), pMr.getLat());
             d.setGeometry(g);
             if(pMr.getCarCount() > 1 ){
                 d.setProperties(String.valueOf(pMr.getCarCount()));
