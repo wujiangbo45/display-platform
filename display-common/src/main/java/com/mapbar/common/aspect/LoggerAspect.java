@@ -69,7 +69,7 @@ public class LoggerAspect {
         HttpServletRequest request = attributes.getRequest();
         logger.info("=======================RESPONSE INFO=======================" );
         logger.info("====  REQUEST URL : " + request.getRequestURL());
-        logger.info("====  RESPONSE : " + ret.toString());
+        logger.info("====  RESPONSE : " + String.valueOf(ret));
         logger.info("====  SPEND TIME : " + (System.currentTimeMillis() - startTime.get()) + "ms");
         logger.info("=======================请求处理结束==========================");
     }
@@ -101,7 +101,7 @@ public class LoggerAspect {
     public void doAfterServiceReturning(JoinPoint joinPoint, Object ret) throws Throwable {
         logger.info("=======================service返回信息===========================" );
         logger.info("====  CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        logger.info("====  RESPONSE : " + ret.toString());
+        logger.info("====  RESPONSE : " + String.valueOf(ret));
         logger.info("=======================service处理结束===========================");
     }
 
