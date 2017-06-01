@@ -41,9 +41,10 @@ public class MockMvcTestBase {
     public void setUp() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
+
     protected void assertSuccess(String urlTemplate,Map<String,String> requestMap) throws Exception {
 
-        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post(urlTemplate);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get(urlTemplate);
         for (Map.Entry<String,String> entry : requestMap.entrySet()) {
             builder.param(entry.getKey(),entry.getValue());
         }
