@@ -25,7 +25,7 @@ import java.util.List;
 public class ScheduledService extends BaseService{
     private static final Logger logger = LoggerFactory.getLogger(ScheduledService.class);
 
-    @Scheduled(cron="0 0/1 * * * ?")
+    @Scheduled(cron="0 0/3 * * * ?")
     public void executeFileDownLoadTask() {
         List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("localcloud.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
         // 存储缓存
