@@ -2,6 +2,7 @@ package com.mapbar.common.web.servlet;
 
 import com.mapbar.common.web.bind.GenericResponse;
 import com.mapbar.common.web.bind.GenericResponseBody;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -27,7 +28,7 @@ public class GenericResponseBodyMethodProcessor extends RequestResponseBodyMetho
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         return false;
-    };
+    }
 
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {

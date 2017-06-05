@@ -2,6 +2,8 @@ package com.mapbar.common.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -20,9 +22,6 @@ import java.io.IOException;
 public class AccessLoggerFilter implements Filter {
 	
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
-
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
