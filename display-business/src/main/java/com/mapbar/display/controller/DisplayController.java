@@ -31,7 +31,7 @@ public class DisplayController {
 
     @RequestMapping(value = "/queryVehicleRealtimePosition")
     @GenericResponseBody
-    @LoginRequired
+//    @LoginRequired
     public VehicleRealtimePositionResp queryVehicleRealtimePosition(@Valid VehicleRealtimePositionReq req) throws Exception {
         VehicleRealtimePositionResp resp = service.getVehicleRealtimePosition(req);
         return resp;

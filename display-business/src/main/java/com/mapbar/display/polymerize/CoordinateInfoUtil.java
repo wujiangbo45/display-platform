@@ -22,7 +22,7 @@ public class CoordinateInfoUtil {
             g.setCoordinates(pMr.getLon(), pMr.getLat());
             d.setGeometry(g);
             if(pMr.getCarCount() > 1 ){
-                d.setProperties(String.valueOf(pMr.getCarCount()));
+                d.setProperties(pMr.getCarCount());
             }
             f.add(d);
         }
