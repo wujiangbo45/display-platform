@@ -16,7 +16,7 @@ public class Features {
 
     private Geometry geometry;
 
-    private Map<String,String> properties = new HashMap<String,String>(1);
+    private Map<String,Integer> properties = new HashMap<String,Integer>(1);
 
     public String getType() {
         return type;
@@ -34,11 +34,11 @@ public class Features {
         this.geometry = geometry;
     }
 
-    public Map<String, String> getProperties() {
+    public Map<String, Integer> getProperties() {
         return properties;
     }
 
-    public void setProperties(String number) {
+    public void setProperties(Integer number) {
         this.properties.put("number",number);
     }
 
