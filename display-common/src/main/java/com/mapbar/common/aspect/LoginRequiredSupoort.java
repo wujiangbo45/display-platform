@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,6 +23,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author: wujiangbo
@@ -34,7 +36,7 @@ public class LoginRequiredSupoort {
     private final Logger logger = LoggerFactory.getLogger(LoginRequiredSupoort.class);
 
     @Autowired
-    RedisUtil redisUtil;
+    RedisTemplate<String,String> redisTemplate;
 
     @Pointcut("@annotation(com.mapbar.common.aspect.LoginRequired)")
     @Order(1)
@@ -71,11 +73,11 @@ public class LoginRequiredSupoort {
         String stoken = Const.TOKEN_KEY_PREFX + token;
 
         // 判断缓存里是否有token,并且key的值不为空
-        if(redisUtil.hasKey(stoken) && StringUtil.isNotEmpty(redisUtil.get(stoken))){
+        if(redisTemplate.hasKey(stoken) && StringUtil.isNotEmpty(redisTemplate.boundValueOps(stoken).get())){
             logger.info("====  SUCCESS : token验证成功");
             logger.info("=======================token验证结束==========================");
             // 刷新token,30分钟
-            redisUtil.expire(stoken,Const.TOKEN_LIVE_TIME_MINUTE);
+            redisTemplate.boundValueOps(stoken).expire(Const.TOKEN_LIVE_TIME_MINUTE, TimeUnit.MINUTES);
             obj = joinPoint.proceed();
         }else {
             // token expire

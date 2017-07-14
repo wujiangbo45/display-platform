@@ -1,15 +1,9 @@
 package com.mapbar.display;
 
-import com.mapbar.common.filter.AccessLoggerFilter;
-import com.mapbar.common.web.servlet.GenericResponseBodyMethodProcessorRegister;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -23,9 +17,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @ComponentScan("com.mapbar.*")
 @EnableScheduling
+@MapperScan(basePackages = "com.mapbar.display.dao")
 public class Application implements CommandLineRunner {
 
 

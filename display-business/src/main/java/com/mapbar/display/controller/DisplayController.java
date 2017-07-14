@@ -7,11 +7,12 @@ import com.mapbar.common.utils.http.HttpUtil;
 import com.mapbar.common.utils.http.LocalCloudRespopnse;
 import com.mapbar.common.web.bind.GenericResponseBody;
 import com.mapbar.display.dto.*;
+import com.mapbar.display.service.IDisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.mapbar.display.service.IDisplayService;
+//import com.mapbar.display.service.IDisplayService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.List;
         { RequestMethod.GET,RequestMethod.POST }, produces =
         { "application/json;charset=UTF-8" })
 public class DisplayController {
-
+//
     @Autowired
     IDisplayService service;
 

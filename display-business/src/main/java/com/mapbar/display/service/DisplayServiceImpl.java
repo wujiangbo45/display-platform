@@ -3,15 +3,14 @@ package com.mapbar.display.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.mapbar.common.Const;
 import com.mapbar.common.UrlProperties;
-import com.mapbar.common.base.BaseService;
 import com.mapbar.common.exception.ErrorCode;
 import com.mapbar.common.exception.business.TokenExpireException;
 import com.mapbar.common.exception.business.UserCheckException;
 import com.mapbar.common.utils.*;
 import com.mapbar.common.utils.http.HttpUtil;
 import com.mapbar.common.utils.http.LocalCloudRespopnse;
+import com.mapbar.display.dao.HyCarMapper;
 import com.mapbar.display.dto.*;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -27,18 +26,23 @@ import java.util.List;
  * @Create: 2017/05/22 9:34
  */
 @Service
-public class DisplayServiceImpl extends BaseService implements IDisplayService{
-
+public class DisplayServiceImpl implements IDisplayService{
 
 
     @Autowired
+    RedisTemplate<String,String> redisTemplate;
+
+    @Autowired
     PolymerizeService polymerizeService;
+
+    @Autowired
+    HyCarMapper hyCarMapper;
 
     @Override
     public VehicleRealtimePositionResp getVehicleRealtimePosition(VehicleRealtimePositionReq req) throws Exception{
         String numBit = req.getNumBits();
         // 从缓存获取数据
-        List<LocationDataResp> resp = JsonUtils.fromJson(redisUtil.get(Const.LOCATION_DATA_KEY), new TypeReference<List<LocationDataResp>>() {
+        List<LocationDataResp> resp = JsonUtils.fromJson(redisTemplate.boundValueOps(Const.LOCATION_DATA_KEY).get(), new TypeReference<List<LocationDataResp>>() {
         });
         // 过滤数据
         List<PolymerizeDto> dtoList = polymerizeService.filterScreenCarToDto(resp, req);
@@ -82,17 +86,13 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
             GetServiceStatisticsResp ssRes = new GetServiceStatisticsResp();
             // 判断服务站是一级或者二级
             String serverStationId = String.valueOf(dictNumberObj.getDistrict());
-            String sqlStr;
-
+            ServerStationInfo info = null;
             if (serverStationId.startsWith("95")){// 二级服务站
                 serverStationId = getStationId(serverStationId);
-                sqlStr = "getSecondServiceStationInfo";
+                info = hyCarMapper.getSecondServiceStationInfo(serverStationId);
             } else{// 一级服务站
-                sqlStr = "getFirstServiceStationInfo";
+                info = hyCarMapper.getFirstServiceStationInfo(serverStationId);
             }
-            ServerStationReq command = new ServerStationReq();
-            command.setId(serverStationId);
-            ServerStationInfo info = (ServerStationInfo)dao.sqlFindObject(sqlStr,command,ServerStationInfo.class);
             ssRes.setDistrict(String.valueOf(dictNumberObj.getDistrict()));
             ssRes.setNumber(String.valueOf(dictNumberObj.getNumber()));
             if (null != info){
@@ -118,7 +118,7 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
     public HyAccountResp login(LoginInReq command) throws Exception{
         // 查询用户信息
         String accountPwd = "";
-        HyAccountDto hyAccountDto = (HyAccountDto)dao.sqlFindObject("queryLoginInfoSql", command, HyAccountDto.class);
+        HyAccountDto hyAccountDto = hyCarMapper.queryLoginInfoSql(command.getUsername());
         if (null != hyAccountDto && command.getUsername().equals(hyAccountDto.getAccountname())) {
             accountPwd = hyAccountDto.getAccountpwd();
 
@@ -136,13 +136,13 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
                 String uKey = Const.USER_KEY_PREFX + command.getUsername();
                 String tKey = Const.TOKEN_KEY_PREFX + token;
                 // 删除redis记录
-                if(redisUtil.hasKey(uKey)){
-                    redisUtil.delete(uKey);
-                    redisUtil.delete(Const.TOKEN_KEY_PREFX + redisUtil.get(uKey));
+                if(redisTemplate.hasKey(uKey)){
+                    redisTemplate.delete(uKey);
+                    redisTemplate.delete(Const.TOKEN_KEY_PREFX + redisTemplate.boundValueOps(uKey).get());
                 }
                 // 存入redis
-                redisUtil.set(uKey, token, Const.TOKEN_LIVE_TIME_MINUTE);//用户对应的token
-                redisUtil.set(tKey, json,Const.TOKEN_LIVE_TIME_MINUTE);//token对应的用户信息
+                redisTemplate.boundValueOps(uKey).set(token, Const.TOKEN_LIVE_TIME_MINUTE);//用户对应的token
+                redisTemplate.boundValueOps(tKey).set(json,Const.TOKEN_LIVE_TIME_MINUTE);//token对应的用户信息
 
             } else {
                 throw new UserCheckException(ErrorCode.ERROR_PASSWD);
@@ -159,13 +159,7 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
 
     @Override
     public int getTotalVehicle() throws Exception{
-        int intTotal = 0;
-
-        String countSql = sqlLaberUtil.getSqlLabel("carTotal");
-        int count = Integer.parseInt(entityManager.createNativeQuery(countSql).getSingleResult().toString());
-        intTotal = count;
-
-        return intTotal;
+        return hyCarMapper.carTotal();
     }
 
     @Override
@@ -174,16 +168,17 @@ public class DisplayServiceImpl extends BaseService implements IDisplayService{
         String token = req.getToken(); // stoken_xxx
         String cacheTokenKey = Const.TOKEN_KEY_PREFX + token;
         // 查询是否有此token
-        if (!redisUtil.hasKey(cacheTokenKey)){
+        if (!redisTemplate.hasKey(cacheTokenKey)){
             // 无此token
             throw new TokenExpireException("token:" + token);
         }
         // 获取token信息
-        HyAccountDto res = JsonUtils.fromJson(redisUtil.get(cacheTokenKey),HyAccountDto.class);
+        HyAccountDto res = JsonUtils.fromJson(redisTemplate.boundValueOps(cacheTokenKey).get(),HyAccountDto.class);
         // 获取用户名并且清空缓存 user_xxx
         String uKey = Const.USER_KEY_PREFX + res.getAccountname();
         // 清空缓存
-        redisUtil.delete(cacheTokenKey, uKey);
+        redisTemplate.delete(cacheTokenKey);
+        redisTemplate.delete(uKey);
 
     }
 }
