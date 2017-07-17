@@ -10,6 +10,7 @@ import com.mapbar.display.dto.*;
 import com.mapbar.display.service.IDisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //import com.mapbar.display.service.IDisplayService;
@@ -64,9 +65,9 @@ public class DisplayController {
     }
 
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login",consumes = {"application/json","application/x-www-form-urlencoded"})
     @GenericResponseBody
-    public HyAccountResp login(@Valid LoginInReq command) throws Exception{
+    public HyAccountResp login(@RequestBody @Valid LoginInReq command) throws Exception{
         return service.login(command);
     }
 

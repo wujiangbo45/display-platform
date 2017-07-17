@@ -16,6 +16,8 @@
     <modules>
         <module>display-common</module>
         <module>display-business</module>
+        <module>eurekaserver</module>
+        <module>zuul</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
