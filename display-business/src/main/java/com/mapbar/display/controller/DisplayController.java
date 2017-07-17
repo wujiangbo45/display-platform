@@ -65,9 +65,9 @@ public class DisplayController {
     }
 
 
-    @RequestMapping(value = "/login",consumes = {"application/json","application/x-www-form-urlencoded"})
+    @RequestMapping(value = "/login")
     @GenericResponseBody
-    public HyAccountResp login(@RequestBody @Valid LoginInReq command) throws Exception{
+    public HyAccountResp login(@Valid LoginInReq command) throws Exception{
         return service.login(command);
     }
 

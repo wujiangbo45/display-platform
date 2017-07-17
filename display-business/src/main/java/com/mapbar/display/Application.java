@@ -20,8 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 //@EnableAutoConfiguration
 @ComponentScan("com.mapbar.*")
-//@EnableEurekaClient
-@EnableScheduling
+@EnableEurekaClient
+//@EnableScheduling
 @MapperScan(basePackages = "com.mapbar.display.dao")
 public class Application implements CommandLineRunner {
 
