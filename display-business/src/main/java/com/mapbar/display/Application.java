@@ -21,7 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@EnableAutoConfiguration
 @ComponentScan("com.mapbar.*")
 @EnableEurekaClient
-@EnableScheduling
+//@EnableScheduling
 @MapperScan(basePackages = "com.mapbar.display.dao")
 public class Application implements CommandLineRunner {
 
