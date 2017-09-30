@@ -31,4 +31,31 @@
             ) temp
             WHERE 1=1
   </select>
+
+    <select id="selectGroupByWoType" parameterType="java.lang.Integer"
+            resultType="com.mapbar.display.dto.SelectWorkOrderStatus">
+  SELECT
+    COUNT(sortType) num, sortType
+FROM
+    (SELECT
+        CASE
+                WHEN wo_status IN (7 , 8, 11) THEN 1
+                ELSE 2
+            END sortType
+    FROM
+        tbl_work_order
+    WHERE
+    1=1
+        <if test="type == 1">
+          and  order_way IN (1 , 2) AND wo_type = 2
+        </if>
+        <if test="type == 2">
+            and order_way in (1,2)
+        </if>
+        <if test="type == 3">
+            and  order_way = 3 and wo_type = 1
+        </if>
+        ) t
+    GROUP BY t.sortType
+    </select>
 </mapper>

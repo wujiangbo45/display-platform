@@ -201,7 +201,9 @@ public final class HttpUtil {
 			// 执行请求并接收响应码
 			int resultCode = httpClient.executeMethod(httpMethod);
 
-//			String respStr = httpMethod.getResponseBodyAsString();
+			if (resultCode != 200){
+				throw new HttpRequestNotSuccessException(resultCode,"请求404！");
+			}
 
 			InputStream inputStream = httpMethod.getResponseBodyAsStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
