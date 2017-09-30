@@ -19,22 +19,22 @@ import java.util.List;
  */
 @Configuration
 public class RestTemplateConfig {
-    @Bean
-    RestTemplate restTemplate() {
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        requestFactory.setReadTimeout(5000);
-        requestFactory.setConnectTimeout(5000);
-
-        // 添加转换器
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        messageConverters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
-        messageConverters.add(new FormHttpMessageConverter());
-        messageConverters.add(new MappingJackson2HttpMessageConverter());
-
-        RestTemplate restTemplate = new RestTemplate(messageConverters);
-        restTemplate.setRequestFactory(requestFactory);
-        restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
-        return restTemplate;
-    }
+//    @Bean
+//    RestTemplate restTemplate() {
+//        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+//        requestFactory.setReadTimeout(5000);
+//        requestFactory.setConnectTimeout(5000);
+//
+//        // 添加转换器
+//        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+//        messageConverters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
+//        messageConverters.add(new FormHttpMessageConverter());
+//        messageConverters.add(new MappingJackson2HttpMessageConverter());
+//
+//        RestTemplate restTemplate = new RestTemplate(messageConverters);
+//        restTemplate.setRequestFactory(requestFactory);
+//        restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
+//        return restTemplate;
+//    }
 
 }

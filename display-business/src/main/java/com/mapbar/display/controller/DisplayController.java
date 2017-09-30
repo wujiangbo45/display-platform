@@ -8,6 +8,7 @@ import com.mapbar.common.utils.http.LocalCloudRespopnse;
 import com.mapbar.common.web.bind.GenericResponseBody;
 import com.mapbar.display.dto.*;
 import com.mapbar.display.service.IDisplayService;
+import com.mapbar.display.service.WorkOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,9 @@ public class DisplayController {
 //
     @Autowired
     IDisplayService service;
+
+    @Autowired
+    WorkOrderService workOrderService;
 
     @RequestMapping(value = "/queryVehicleRealtimePosition")
     @GenericResponseBody
@@ -82,22 +86,6 @@ public class DisplayController {
     @GenericResponseBody
 //    @LoginRequired
     public ServiceWorkOrderResp queryWorkOrderOfMonth() throws Exception {
-        ServiceWorkOrderResp resp = new ServiceWorkOrderResp();
-        resp.setTodalOutService("1000");
-        resp.setOutService("500");
-        resp.setTotalReservationOrder("1000");
-        resp.setReservationOrder("500");
-        resp.setTotalIndependentStation("1000");
-        resp.setIndependentStation("500");
-        resp.setTotalWorkOrder("200000");
-        resp.setBeAssignedOrder("300");
-        resp.setBePickedOrder("400");
-        resp.setCheckingOrder("500");
-        resp.setDoingServiceOrder("100");
-        resp.setBeConfirmedOrder("100");
-        resp.setWaitingOutStationOrder("400");
-        resp.setOutStationOrder("400");
-        resp.setClosedOrder("450");
-        return resp;
+        return workOrderService.getGroupByData();
     }
 }
