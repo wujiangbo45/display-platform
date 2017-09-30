@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by zhangdong on 2017/6/2.
  */
-@ConfigurationProperties(prefix = "redis")
+//@ConfigurationProperties(prefix = "redis")
 public class RedisProperties {
     private int database = 0;
     private String url;
