@@ -24,7 +24,7 @@ import java.util.List;
 public class ScheduledService{
     private static final Logger logger = LoggerFactory.getLogger(ScheduledService.class);
 
-//    @Autowired
+    @Autowired
     RedisTemplate<String,String> redisTemplate;
     @Scheduled(cron="0 0/3 * * * ?")
     public void executeFileDownLoadTask() {
