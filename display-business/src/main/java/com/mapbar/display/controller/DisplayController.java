@@ -84,7 +84,7 @@ public class DisplayController {
 
     @RequestMapping(value = "/queryWorkOrderOfMonth")
     @GenericResponseBody
-    @LoginRequired
+//    @LoginRequired
     public ServiceWorkOrderResp queryWorkOrderOfMonth() throws Exception {
         return workOrderService.getGroupByData();
     }

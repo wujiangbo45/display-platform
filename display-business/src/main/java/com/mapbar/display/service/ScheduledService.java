@@ -26,7 +26,7 @@ public class ScheduledService{
 
     @Autowired
     RedisTemplate<String,String> redisTemplate;
-    @Scheduled(cron="0 0/3 * * * ?")
+    @Scheduled(cron="0 0/1 * * * ?")
     public void executeFileDownLoadTask() {
         List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("localcloud.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
         // 存储缓存
