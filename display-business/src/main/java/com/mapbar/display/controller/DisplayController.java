@@ -80,7 +80,7 @@ public class DisplayController {
 
     @RequestMapping(value = "/queryWorkOrderOfMonth")
     @GenericResponseBody
-//    @LoginRequired
+    @LoginRequired
     public ServiceWorkOrderResp queryWorkOrderOfMonth() throws Exception {
         ServiceWorkOrderResp resp = new ServiceWorkOrderResp();
         resp.setTodalOutService("1000");
