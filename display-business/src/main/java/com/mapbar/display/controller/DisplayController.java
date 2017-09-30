@@ -76,4 +76,28 @@ public class DisplayController {
     public void login(@Valid LogoutReq req) throws Exception{
         service.logOut(req);
     }
+
+
+    @RequestMapping(value = "/queryWorkOrderOfMonth")
+    @GenericResponseBody
+//    @LoginRequired
+    public ServiceWorkOrderResp queryWorkOrderOfMonth() throws Exception {
+        ServiceWorkOrderResp resp = new ServiceWorkOrderResp();
+        resp.setTodalOutService("1000");
+        resp.setOutService("500");
+        resp.setTotalReservationOrder("1000");
+        resp.setReservationOrder("500");
+        resp.setTotalIndependentStation("1000");
+        resp.setIndependentStation("500");
+        resp.setTotalWorkOrder("200000");
+        resp.setBeAssignedOrder("300");
+        resp.setBePickedOrder("400");
+        resp.setCheckingOrder("500");
+        resp.setDoingServiceOrder("100");
+        resp.setBeConfirmedOrder("100");
+        resp.setWaitingOutStationOrder("400");
+        resp.setOutStationOrder("400");
+        resp.setClosedOrder("450");
+        return resp;
+    }
 }
