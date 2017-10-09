@@ -1,5 +1,6 @@
 package com.mapbar.display.service;
 
+import com.mapbar.common.utils.DateUtil;
 import com.mapbar.display.dao.WorkOrderMapper;
 import com.mapbar.display.dto.SelectWorkOrderStatus;
 import com.mapbar.display.dto.ServiceWorkOrderResp;
@@ -23,17 +24,14 @@ public class WorkOrderService {
     WorkOrderMapper workOrderMapper;
 
     public ServiceWorkOrderResp getGroupByData(){
-        List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus();
+
+        // 当前时间
+        String currentMonth = getCurrentMonthTime();
+        List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus(currentMonth);
 
         ServiceWorkOrderResp resp = new ServiceWorkOrderResp();
-        if (list != null|| !list.isEmpty()){
+        if (list != null && !list.isEmpty() && list.get(0) != null){
             WorkOrderGroupByStatus status = list.get(0);
-            resp.setTodalOutService("1000");
-            resp.setOutService("500");
-            resp.setTotalReservationOrder("1000");
-            resp.setReservationOrder("500");
-            resp.setTotalIndependentStation("1000");
-            resp.setIndependentStation(String.valueOf("333"));
             resp.setTotalWorkOrder(String.valueOf(status.getNum()));
             resp.setBeAssignedOrder(String.valueOf(status.getIndividualNum()));
             resp.setBePickedOrder(String.valueOf(status.getWaitingCarNum()));
@@ -43,26 +41,23 @@ public class WorkOrderService {
             resp.setWaitingOutStationOrder(String.valueOf(status.getWaitingStationNum()));
             resp.setOutStationOrder(String.valueOf(status.getExitStationNum()));
             resp.setClosedOrder(String.valueOf(status.getSystemClose()));
+            // 获取外出救援数据
+            // 获取预约出站
+            // 获取自助进站
+            List<SelectWorkOrderStatus> selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(currentMonth, 1);
+            Map<String,String> m1 = totalRecord(selectWorkOrderStatus);
+            resp.setTodalOutService(m1.get("total"));
+            resp.setOutService(m1.get("doingNum"));
+            selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(currentMonth, 2);
+            m1 = totalRecord(selectWorkOrderStatus);
+            resp.setTotalReservationOrder(m1.get("total"));
+            resp.setReservationOrder(m1.get("doingNum"));
+            selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(currentMonth,3);
+            m1 = totalRecord(selectWorkOrderStatus);
+            resp.setTotalIndependentStation(m1.get("total"));
+            resp.setIndependentStation(m1.get("doingNum"));
         }
-
-        // 获取外出救援数据
-        // 获取预约出站
-        // 获取自助进站
-        List<SelectWorkOrderStatus> selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(1);
-        Map<String,String> m1 = totalRecord(selectWorkOrderStatus);
-        resp.setTodalOutService(m1.get("total"));
-        resp.setOutService(m1.get("doingNum"));
-        selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(2);
-        m1 = totalRecord(selectWorkOrderStatus);
-        resp.setTotalReservationOrder(m1.get("total"));
-        resp.setReservationOrder(m1.get("doingNum"));
-        selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(3);
-        m1 = totalRecord(selectWorkOrderStatus);
-        resp.setTotalIndependentStation(m1.get("total"));
-        resp.setIndependentStation(m1.get("doingNum"));
         return resp;
-
-
 
     }
 
@@ -83,4 +78,10 @@ public class WorkOrderService {
         m.put("total",String.valueOf(total));
         return m;
     }
+
+
+    private String getCurrentMonthTime(){
+        return DateUtil.getFormatNowDate("yyyy-MM-01 00:00:00");
+    }
+
 }
