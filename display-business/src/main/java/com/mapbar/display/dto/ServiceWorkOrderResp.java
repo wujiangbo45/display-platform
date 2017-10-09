@@ -5,21 +5,21 @@ package com.mapbar.display.dto;
  * @Create: 2017/09/29 下午4:21
  */
 public class ServiceWorkOrderResp {
-    private String todalOutService;
-    private String outService;
-    private String totalReservationOrder;
-    private String reservationOrder;
-    private String totalIndependentStation;
-    private String independentStation;
-    private String totalWorkOrder;
-    private String beAssignedOrder;
-    private String bePickedOrder;
-    private String checkingOrder;
-    private String doingServiceOrder;
-    private String beConfirmedOrder;
-    private String waitingOutStationOrder;
-    private String outStationOrder;
-    private String closedOrder;
+    private String todalOutService = "0";
+    private String outService = "0";
+    private String totalReservationOrder = "0";
+    private String reservationOrder = "0";
+    private String totalIndependentStation = "0";
+    private String independentStation = "0";
+    private String totalWorkOrder = "0";
+    private String beAssignedOrder = "0";
+    private String bePickedOrder = "0";
+    private String checkingOrder = "0";
+    private String doingServiceOrder = "0";
+    private String beConfirmedOrder = "0";
+    private String waitingOutStationOrder = "0";
+    private String outStationOrder = "0";
+    private String closedOrder = "0";
 
     public String getTodalOutService() {
         return todalOutService;
