@@ -27,7 +27,6 @@
                 FROM tbl_work_order two
                 LEFT JOIN hy_car hc ON two.chassis_num = hc.CHASSIS_NUM
                 LEFT JOIN t_bridge_type tbt on substring(hc.car_model_code, 1, 1) = tbt.manufacturer_code AND substring(hc.car_model_code, 5, 1) = tbt.CODE
-                where create_time >= #{dayTime,jdbcType=TIMESTAMP}
                 GROUP BY two.wo_type,tbt.simple_name
             ) temp
             WHERE 1=1
