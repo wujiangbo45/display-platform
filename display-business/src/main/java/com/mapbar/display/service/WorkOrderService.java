@@ -27,7 +27,7 @@ public class WorkOrderService {
 
         // 当前时间
         String currentMonth = getCurrentMonthTime();
-        List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus(currentMonth);
+        List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus();
 
         ServiceWorkOrderResp resp = new ServiceWorkOrderResp();
         if (list != null && !list.isEmpty() && list.get(0) != null){
@@ -64,17 +64,14 @@ public class WorkOrderService {
     private Map<String,String> totalRecord(List<SelectWorkOrderStatus> list){
         Map<String,String> m = new HashMap<>(2);
         int total = 0;
-        SelectWorkOrderStatus status;
-        if (list == null || list.isEmpty()){
-            m.put("doingNum","0");
-        }else{
-            for (int i = 0; i < 2; i++) {
-                status = list.get(i);
+        int doingNum = 0;
+        if (list != null && !list.isEmpty()){
+            for (SelectWorkOrderStatus status: list) {
                 total += Integer.parseInt(status.getNum().toString());
-                if (1 == status.getSortType()) m.put("doingNum",status.getNum().toString());
+                if (1 == status.getSortType()) doingNum = status.getNum().intValue();
             }
         }
-
+        m.put("doingNum",String.valueOf(doingNum));
         m.put("total",String.valueOf(total));
         return m;
     }

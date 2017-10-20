@@ -12,5 +12,5 @@ public interface WorkOrderMapper {
 
     List<WorkOrderGroupByStatus> groupByWorkOrderByStatus();
 
-    List<SelectWorkOrderStatus> selectGroupByWoType(@Param("type") int type);
+    List<SelectWorkOrderStatus> selectGroupByWoType(@Param("dayTime") String daytime, @Param("type") int type);
 }
