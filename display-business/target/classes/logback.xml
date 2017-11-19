@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.apache.http.wire" level="DEBUG" />
+    <logger name="org.apache" level="INFO" />
+    <logger name="com.mapbar" level="DEBUG"/>
+    <logger name="org.apache.commons.digester" level="DEBUG" />
+    <logger name="org.apache.commons.beanutils" level="DEBUG" />
+    <logger name="org.apache.commons.httpclient" level="DEBUG" />
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
