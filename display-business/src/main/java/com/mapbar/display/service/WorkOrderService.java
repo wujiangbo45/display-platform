@@ -1,11 +1,15 @@
 package com.mapbar.display.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.mapbar.common.Const;
 import com.mapbar.common.UrlProperties;
 import com.mapbar.common.utils.DateUtil;
+import com.mapbar.common.utils.JsonUtil;
+import com.mapbar.common.utils.JsonUtils;
 import com.mapbar.common.utils.StringUtil;
 import com.mapbar.common.utils.http.HttpUtil;
 import com.mapbar.common.utils.http.LocalCloudRespopnse;
+import com.mapbar.common.web.bind.GenericResponse;
 import com.mapbar.display.dao.WorkOrderMapper;
 import com.mapbar.display.dto.SelectWorkOrderStatus;
 import com.mapbar.display.dto.ServiceWorkOrderResp;
@@ -39,40 +43,46 @@ public class WorkOrderService {
 
         String userId = getUserId();
         List<String> userIdList = Arrays.stream(userId.replaceAll("'","").split(",")).collect(Collectors.toList());
-        // 当前时间
-        List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus(userIdList);
-
-        ServiceWorkOrderResp resp = new ServiceWorkOrderResp();
-        if (list != null && !list.isEmpty() && list.get(0) != null){
-            WorkOrderGroupByStatus status = list.get(0);
-            resp.setTotalWorkOrder(String.valueOf(status.getNum()));
-            resp.setBeAssignedOrder(String.valueOf(status.getIndividualNum()));
-            resp.setBePickedOrder(String.valueOf(status.getWaitingCarNum()));
-            resp.setCheckingOrder(String.valueOf(status.getCheckInNum()));
-            resp.setDoingServiceOrder(String.valueOf(status.getRepairNum()));
-            resp.setBeConfirmedOrder(String.valueOf(status.getUnConfirmedNum()));
-            resp.setWaitingOutStationOrder(String.valueOf(status.getWaitingStationNum()));
-            // 已完成的
-            resp.setDoneOrder(String.valueOf(status.getNum().intValue()
-                    - status.getIndividualNum().intValue() - status.getWaitingCarNum().intValue()
-                    - status.getCheckInNum().intValue() - status.getRepairNum().intValue()
-                    - status.getUnConfirmedNum().intValue() - status.getWaitingStationNum().intValue()
-            ));
-            // 获取外出救援数据
-            // 获取预约出站
-            // 获取自助进站
-            List<SelectWorkOrderStatus> selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(userIdList, 1);
-            Map<String,String> m1 = totalRecord(selectWorkOrderStatus);
-            resp.setTodalOutService(m1.get("total"));
-            resp.setOutService(m1.get("doingNum"));
-            selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(userIdList, 2);
-            m1 = totalRecord(selectWorkOrderStatus);
-            resp.setTotalReservationOrder(m1.get("total"));
-            resp.setReservationOrder(m1.get("doingNum"));
-            selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(userIdList,3);
-            m1 = totalRecord(selectWorkOrderStatus);
-            resp.setTotalIndependentStation(m1.get("total"));
-            resp.setIndependentStation(m1.get("doingNum"));
+        String workOrder = redisTemplate.opsForValue().get(Const.WORK_ORDER_DATA_KEY);
+        ServiceWorkOrderResp resp = null;
+        if (StringUtil.isNotEmpty(workOrder)){
+            resp = JsonUtils.fromJson(redisTemplate.opsForValue().get(Const.WORK_ORDER_DATA_KEY), new TypeReference<ServiceWorkOrderResp>() {
+            });
+        }else{
+            List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus(userIdList);
+            if (list != null && !list.isEmpty() && list.get(0) != null){
+                WorkOrderGroupByStatus workOrderGroupByStatus = list.get(0);
+                resp = new ServiceWorkOrderResp();
+                resp.setTotalWorkOrder(String.valueOf(workOrderGroupByStatus.getNum()));
+                resp.setBeAssignedOrder(String.valueOf(workOrderGroupByStatus.getIndividualNum()));
+                resp.setBePickedOrder(String.valueOf(workOrderGroupByStatus.getWaitingCarNum()));
+                resp.setCheckingOrder(String.valueOf(workOrderGroupByStatus.getCheckInNum()));
+                resp.setDoingServiceOrder(String.valueOf(workOrderGroupByStatus.getRepairNum()));
+                resp.setBeConfirmedOrder(String.valueOf(workOrderGroupByStatus.getUnConfirmedNum()));
+                resp.setWaitingOutStationOrder(String.valueOf(workOrderGroupByStatus.getWaitingStationNum()));
+                // 已完成的
+                resp.setDoneOrder(String.valueOf(workOrderGroupByStatus.getNum().intValue()
+                        - workOrderGroupByStatus.getIndividualNum().intValue() - workOrderGroupByStatus.getWaitingCarNum().intValue()
+                        - workOrderGroupByStatus.getCheckInNum().intValue() - workOrderGroupByStatus.getRepairNum().intValue()
+                        - workOrderGroupByStatus.getUnConfirmedNum().intValue() - workOrderGroupByStatus.getWaitingStationNum().intValue()
+                ));
+                // 获取外出救援数据
+                // 获取预约出站
+                // 获取自助进站
+                List<SelectWorkOrderStatus> selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(userIdList, 1);
+                Map<String,String> m1 = totalRecord(selectWorkOrderStatus);
+                resp.setTodalOutService(m1.get("total"));
+                resp.setOutService(m1.get("doingNum"));
+                selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(userIdList, 2);
+                m1 = totalRecord(selectWorkOrderStatus);
+                resp.setTotalReservationOrder(m1.get("total"));
+                resp.setReservationOrder(m1.get("doingNum"));
+                selectWorkOrderStatus = workOrderMapper.selectGroupByWoType(userIdList,3);
+                m1 = totalRecord(selectWorkOrderStatus);
+                resp.setTotalIndependentStation(m1.get("total"));
+                resp.setIndependentStation(m1.get("doingNum"));
+                redisTemplate.opsForValue().set(Const.WORK_ORDER_DATA_KEY, JsonUtils.toJson(resp), 3,TimeUnit.MINUTES);
+            }
         }
         return resp;
 

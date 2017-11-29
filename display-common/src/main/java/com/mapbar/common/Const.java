@@ -23,5 +23,6 @@ public class Const {
     public static final String SUCCESS_MESSAGE = "请求成功";
 
     public static final String LOCATION_DATA_KEY = "LocationData";
+    public static final String WORK_ORDER_DATA_KEY = "workOrderData";
 
 }
