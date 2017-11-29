@@ -18,8 +18,7 @@ public class ServiceWorkOrderResp {
     private String doingServiceOrder = "0";
     private String beConfirmedOrder = "0";
     private String waitingOutStationOrder = "0";
-    private String outStationOrder = "0";
-    private String closedOrder = "0";
+    private String doneOrder = "0";
 
     public String getTodalOutService() {
         return todalOutService;
@@ -125,19 +124,11 @@ public class ServiceWorkOrderResp {
         this.waitingOutStationOrder = waitingOutStationOrder;
     }
 
-    public String getOutStationOrder() {
-        return outStationOrder;
+    public String getDoneOrder() {
+        return doneOrder;
     }
 
-    public void setOutStationOrder(String outStationOrder) {
-        this.outStationOrder = outStationOrder;
-    }
-
-    public String getClosedOrder() {
-        return closedOrder;
-    }
-
-    public void setClosedOrder(String closedOrder) {
-        this.closedOrder = closedOrder;
+    public void setDoneOrder(String doneOrder) {
+        this.doneOrder = doneOrder;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface WorkOrderMapper {
 
-    List<WorkOrderGroupByStatus> groupByWorkOrderByStatus();
+    List<WorkOrderGroupByStatus> groupByWorkOrderByStatus(@Param("userId")List<String> userId);
 
-    List<SelectWorkOrderStatus> selectGroupByWoType(@Param("dayTime") String daytime, @Param("type") int type);
+    List<SelectWorkOrderStatus> selectGroupByWoType(@Param("userId") List<String> userId, @Param("type") int type);
 }

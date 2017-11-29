@@ -28,7 +28,7 @@ public class ScheduledService{
     RedisTemplate<String,String> redisTemplate;
     @Scheduled(cron="0 0/1 * * * ?")
     public void executeFileDownLoadTask() {
-        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("localcloud.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
+        List<LocationDataResp> resp = HttpUtil.getLocalCloudJsonRequest(UrlProperties.getUrl("location.getLocationData"),new TypeReference<LocalCloudRespopnse<List<LocationDataResp>>>(){});
         // 存储缓存
         redisTemplate.boundValueOps(Const.LOCATION_DATA_KEY).set(JsonUtils.toJson(resp));
     }
