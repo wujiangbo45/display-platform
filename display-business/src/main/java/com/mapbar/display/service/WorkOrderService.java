@@ -48,7 +48,9 @@ public class WorkOrderService {
         if (StringUtil.isNotEmpty(workOrder)){
             resp = JsonUtils.fromJson(redisTemplate.opsForValue().get(Const.WORK_ORDER_DATA_KEY), new TypeReference<ServiceWorkOrderResp>() {
             });
-        }else{
+        }
+
+        if (resp == null){
             List<WorkOrderGroupByStatus> list = workOrderMapper.groupByWorkOrderByStatus(userIdList);
             if (list != null && !list.isEmpty() && list.get(0) != null){
                 WorkOrderGroupByStatus workOrderGroupByStatus = list.get(0);
