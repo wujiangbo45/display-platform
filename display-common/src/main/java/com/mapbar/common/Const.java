@@ -24,5 +24,6 @@ public class Const {
 
     public static final String LOCATION_DATA_KEY = "LocationData";
     public static final String WORK_ORDER_DATA_KEY = "workOrderData";
+    public static final String WORK_ORDER_DATA_KEY_BY_DAY = "workOrderDataByDay";
 
 }
