@@ -131,4 +131,24 @@ public class ServiceWorkOrderResp {
     public void setDoneOrder(String doneOrder) {
         this.doneOrder = doneOrder;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceWorkOrderResp{" +
+                "todalOutService='" + todalOutService + '\'' +
+                ", outService='" + outService + '\'' +
+                ", totalReservationOrder='" + totalReservationOrder + '\'' +
+                ", reservationOrder='" + reservationOrder + '\'' +
+                ", totalIndependentStation='" + totalIndependentStation + '\'' +
+                ", independentStation='" + independentStation + '\'' +
+                ", totalWorkOrder='" + totalWorkOrder + '\'' +
+                ", beAssignedOrder='" + beAssignedOrder + '\'' +
+                ", bePickedOrder='" + bePickedOrder + '\'' +
+                ", checkingOrder='" + checkingOrder + '\'' +
+                ", doingServiceOrder='" + doingServiceOrder + '\'' +
+                ", beConfirmedOrder='" + beConfirmedOrder + '\'' +
+                ", waitingOutStationOrder='" + waitingOutStationOrder + '\'' +
+                ", doneOrder='" + doneOrder + '\'' +
+                '}';
+    }
 }
