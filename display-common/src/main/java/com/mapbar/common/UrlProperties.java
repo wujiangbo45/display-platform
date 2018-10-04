@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -24,6 +25,16 @@ public class UrlProperties {
     @Value("${location.service.address}")
     public String locationServiceUrl;
 
+    @Value("${operate.service.address}")
+    public String operateUrl;
+
+    private HashMap<String,String> addressMap = new HashMap<>();
+
+    private void inputAddressMap(){
+        addressMap.put("location",locationServiceUrl);
+        addressMap.put("operate",operateUrl);
+    }
+
     @Autowired
     private void init(){
         Resource resourceSql = new ClassPathResource("url.properties");
@@ -33,9 +44,12 @@ public class UrlProperties {
             is = resourceSql.getInputStream();
             props.clear();
             props.load(is);
+            inputAddressMap();
             Set<Map.Entry<Object, Object>> entrySet =  props.entrySet();
             for (Map.Entry<Object,Object> entry : entrySet) {
-                props.setProperty(String.valueOf(entry.getKey()),locationServiceUrl + String.valueOf(entry.getValue()));
+                String urlProfix = String.valueOf(entry.getKey()).split("\\.")[0];
+                props.setProperty(String.valueOf(entry.getKey()),
+                        addressMap.get(urlProfix) + String.valueOf(entry.getValue()));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,5 +60,6 @@ public class UrlProperties {
     public static String getUrl(String key){
         return String.valueOf(props.get(key));
     }
+
 
 }

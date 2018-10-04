@@ -567,7 +567,19 @@ public class DateUtil
     {
         return addInteger(DateUtil.parseDateDot(date), Calendar.DAY_OF_YEAR, dayAmount);
     }
-    
+
+    /**
+     * 增加日期的月份。失败返回null。
+     *
+     * @param date 日期
+     * @param dayAmount 增加数量。可为负数
+     * @return 增加月份后的日期字符串
+     */
+    public static String addDayReturnString(String date, int dayAmount)
+    {
+        return new SimpleDateFormat(date_pattern).format(addInteger(DateUtil.parseDate(date), Calendar.DAY_OF_YEAR, dayAmount));
+    }
+
     /**
      * 增加日期的月份。失败返回null。
      *

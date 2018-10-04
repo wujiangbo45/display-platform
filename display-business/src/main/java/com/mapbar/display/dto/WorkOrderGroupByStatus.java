@@ -97,4 +97,19 @@ public class WorkOrderGroupByStatus {
     public void setNum(BigDecimal num) {
         this.num = num;
     }
+
+    @Override
+    public String toString() {
+        return "WorkOrderGroupByStatus{" +
+                "individualNum=" + individualNum +
+                ", waitingCarNum=" + waitingCarNum +
+                ", checkInNum=" + checkInNum +
+                ", repairNum=" + repairNum +
+                ", unConfirmedNum=" + unConfirmedNum +
+                ", waitingStationNum=" + waitingStationNum +
+                ", exitStationNum=" + exitStationNum +
+                ", systemClose=" + systemClose +
+                ", num=" + num +
+                '}';
+    }
 }

@@ -1,9 +1,11 @@
 package com.mapbar.display.test;
 
 import com.mapbar.display.Application;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.Contains;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -15,11 +17,16 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.test.context.web.ServletTestExecutionListener;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Map;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
  * @Author: wujiangbo
@@ -36,6 +43,8 @@ public class TestDisplay {
 
     private MockMvc mvc;
 
+    public static final Matcher<? super String> RESULT_CODE_200 = new Contains("\"resultCode\":\"200\"");
+
     @Before
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.webAppContextSetup(context).build();//建议使用这种
@@ -44,10 +53,13 @@ public class TestDisplay {
 
     @Test
     public void test() throws Exception {
+
         mvc.perform(MockMvcRequestBuilders.get("/display/queryWorkOrderOfMonth")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(RESULT_CODE_200))
                 .andDo(MockMvcResultHandlers.print())
-                ;
+                .andReturn().getResponse().getContentAsString()
+        ;
     }
 }
