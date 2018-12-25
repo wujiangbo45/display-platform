@@ -42,6 +42,12 @@ public class DateUtil
             return null;
         return new SimpleDateFormat(date_pattern).format(date);
     }
+    public static String formatDate(Date date,String pattern)
+    {
+        if (date == null)
+            return null;
+        return new SimpleDateFormat(pattern).format(date);
+    }
     
     public static String formatSimDate(Date date)
     {
@@ -1348,6 +1354,24 @@ public class DateUtil
             List<String> ret = new ArrayList<>();
             while (sDate.compareTo(eDate) <= 0) {
                 ret.add(formatSimDate(sDate));
+                sDate = addDay(sDate, 1);
+            }
+            return ret.toArray(new String[ret.size()]);
+        } catch (Exception e) {
+            return new String[0];
+        }
+    }
+
+    public static String[] getDateArrayBetween(String start, String end,String parttern) {
+        try {
+            Date sDate = parseDate(start, parttern);
+            Date eDate = parseDate(end, parttern);
+            if (sDate == null || eDate == null || sDate.compareTo(eDate) > 0) {
+                return new String[0];
+            }
+            List<String> ret = new ArrayList<>();
+            while (sDate.compareTo(eDate) <= 0) {
+                ret.add(formatDate(sDate,parttern));
                 sDate = addDay(sDate, 1);
             }
             return ret.toArray(new String[ret.size()]);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
 
-    <property name="APP_NAME" value="display-business" />
+    <property name="APP_NAME" value="display-report" />
     <contextName>${APP_NAME}</contextName>
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->
@@ -20,7 +20,7 @@
     </appender>
     <logger name="org.apache.http.wire" level="DEBUG" />
     <logger name="org.apache" level="INFO" />
-    <logger name="com.mapbar" level="DEBUG"/>
+    <logger name="com.mapbar" level="INFO"/>
     <logger name="org.apache.commons.digester" level="DEBUG" />
     <logger name="org.apache.commons.beanutils" level="DEBUG" />
     <logger name="org.apache.commons.httpclient" level="DEBUG" />
